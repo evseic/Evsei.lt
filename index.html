@@ -16,17 +16,17 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-lang-wrap">
+  <a href="#services" onclick="closeMobile()" data-i18n="nav_services">Services</a>
+  <a href="#portfolio" onclick="closeMobile()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="#blog" onclick="closeMobile()" data-i18n="nav_blog">Blog</a>
+  <a href="#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
+  <div class="mobile-lang">
     <div class="nav-lang">
       <span class="active">LT</span>
       <span class="sep">/</span>
       <span class="inactive">EN</span>
     </div>
   </div>
-  <a href="#services" onclick="closeMobile()" data-i18n="nav_services">Services</a>
-  <a href="#portfolio" onclick="closeMobile()" data-i18n="nav_portfolio">Portfolio</a>
-  <a href="#blog" onclick="closeMobile()" data-i18n="nav_blog">Blog</a>
-  <a href="#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
 </div>
 
 <!-- HEADER -->
@@ -66,8 +66,8 @@
         <radialGradient id="pupilGrad" cx="38%" cy="35%" r="70%"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient>
         <radialGradient id="glintGrad" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="100%" stop-color="#aaffcc" stop-opacity="0"/></radialGradient>
         <radialGradient id="scleraGrad" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8f5ee"/><stop offset="70%" stop-color="#c8e8d8"/><stop offset="100%" stop-color="#9acfb4"/></radialGradient>
-        <filter id="eyeGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="softGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="eyeGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="softGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         <clipPath id="eyeClip"><ellipse cx="600" cy="350" rx="230" ry="112"/></clipPath>
       </defs>
       <rect width="1200" height="480" fill="url(#bgGrad)"/>
@@ -87,42 +87,40 @@
         <circle cx="340" cy="310" r="1" fill="#00dd66" style="--dx:-20px;--dy:8px;animation:particleFloat 11s ease-in-out 4s infinite;"/>
         <circle cx="860" cy="395" r="1.2" fill="#22ff88" style="--dx:18px;--dy:-10px;animation:particleFloat 9.5s ease-in-out 2.5s infinite;"/>
       </g>
-      <g transform="scale(0.85)" transform-origin="600 350">
-        <g style="transform-origin:600px 350px;animation:blink 6s ease-in-out infinite;">
-          <ellipse cx="600" cy="350" rx="230" ry="112" fill="url(#scleraGrad)" filter="url(#eyeGlow)"/>
-          <g clip-path="url(#eyeClip)">
-            <circle cx="600" cy="350" r="95" fill="url(#irisGrad)" style="animation:irisGlow 3s ease-in-out infinite;"/>
-            <circle cx="600" cy="350" r="88" fill="none" stroke="#00ff6640" stroke-width="1.5"/>
-            <circle cx="600" cy="350" r="74" fill="none" stroke="#00ff6630" stroke-width="1"/>
-            <circle cx="600" cy="350" r="60" fill="none" stroke="#00ff6650" stroke-width="0.8"/>
-            <g stroke="#00cc4420" stroke-width="0.7">
-              <line x1="600" y1="260" x2="600" y2="350"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(30,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(60,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(90,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(120,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(150,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(180,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(210,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(240,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(270,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(300,600,350)"/>
-              <line x1="600" y1="260" x2="600" y2="350" transform="rotate(330,600,350)"/>
-            </g>
-            <circle cx="600" cy="350" r="44" fill="url(#pupilGrad)" style="animation:pupilDrift 8s ease-in-out infinite;"/>
-            <rect x="505" y="260" width="190" height="3" fill="#00ff88" opacity="0.18" style="animation:scanLine 4s linear infinite;"/>
-            <circle cx="575" cy="320" r="14" fill="url(#glintGrad)" opacity="0.7"/>
-            <circle cx="622" cy="308" r="6" fill="#ffffff" opacity="0.4"/>
+      <g style="transform-origin:600px 350px;animation:blink 6s ease-in-out infinite;">
+        <ellipse cx="600" cy="350" rx="230" ry="112" fill="url(#scleraGrad)" filter="url(#eyeGlow)"/>
+        <g clip-path="url(#eyeClip)">
+          <circle cx="600" cy="350" r="95" fill="url(#irisGrad)" style="animation:irisGlow 3s ease-in-out infinite;"/>
+          <circle cx="600" cy="350" r="88" fill="none" stroke="#00ff6640" stroke-width="1.5"/>
+          <circle cx="600" cy="350" r="74" fill="none" stroke="#00ff6630" stroke-width="1"/>
+          <circle cx="600" cy="350" r="60" fill="none" stroke="#00ff6650" stroke-width="0.8"/>
+          <g stroke="#00cc4420" stroke-width="0.7">
+            <line x1="600" y1="260" x2="600" y2="350"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(30,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(60,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(90,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(120,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(150,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(180,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(210,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(240,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(270,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(300,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(330,600,350)"/>
           </g>
-          <ellipse cx="600" cy="350" rx="230" ry="112" fill="none" stroke="#003d28" stroke-width="2.5"/>
-          <path d="M 370 350 Q 600 238 830 350" fill="#001a10" opacity="0.35"/>
-          <g stroke="#002415" stroke-width="2" stroke-linecap="round" opacity="0.6">
-            <line x1="430" y1="300" x2="418" y2="284"/><line x1="470" y1="274" x2="462" y2="256"/>
-            <line x1="515" y1="255" x2="511" y2="237"/><line x1="560" y1="245" x2="558" y2="226"/>
-            <line x1="605" y1="242" x2="605" y2="223"/><line x1="650" y1="248" x2="652" y2="229"/>
-            <line x1="693" y1="260" x2="698" y2="242"/><line x1="733" y1="278" x2="741" y2="261"/>
-            <line x1="768" y1="302" x2="778" y2="287"/>
-          </g>
+          <circle cx="600" cy="350" r="44" fill="url(#pupilGrad)" style="animation:pupilDrift 8s ease-in-out infinite;"/>
+          <rect x="505" y="260" width="190" height="3" fill="#00ff88" opacity="0.18" style="animation:scanLine 4s linear infinite;"/>
+          <circle cx="575" cy="320" r="14" fill="url(#glintGrad)" opacity="0.7"/>
+          <circle cx="622" cy="308" r="6" fill="#ffffff" opacity="0.4"/>
+        </g>
+        <ellipse cx="600" cy="350" rx="230" ry="112" fill="none" stroke="#003d28" stroke-width="2.5"/>
+        <path d="M 370 350 Q 600 238 830 350" fill="#001a10" opacity="0.35"/>
+        <g stroke="#002415" stroke-width="2" stroke-linecap="round" opacity="0.6">
+          <line x1="430" y1="300" x2="418" y2="284"/><line x1="470" y1="274" x2="462" y2="256"/>
+          <line x1="515" y1="255" x2="511" y2="237"/><line x1="560" y1="245" x2="558" y2="226"/>
+          <line x1="605" y1="242" x2="605" y2="223"/><line x1="650" y1="248" x2="652" y2="229"/>
+          <line x1="693" y1="260" x2="698" y2="242"/><line x1="733" y1="278" x2="741" y2="261"/>
+          <line x1="768" y1="302" x2="778" y2="287"/>
         </g>
       </g>
       <g style="transform-origin:600px 350px;animation:blink2 11s ease-in-out 3s infinite;">
@@ -412,8 +410,10 @@
       <h2 class="contact-h2 font-headline" data-i18n="contact_title">Let's <br/>Build.</h2>
       <div class="contact-info">
         <div><span class="info-label" data-i18n="contact_label_location">Location</span><p class="info-value font-headline" data-i18n="contact_value_location">Vilnius, Lithuania</p></div>
-        <div><span class="info-label" data-i18n="contact_label_phone">Phone</span><p class="info-value font-headline"><a href="tel:+37067464446">+37067464446</a></p></div>
-        <div><span class="info-label" data-i18n="contact_direct">Direct</span><p class="info-value font-headline"><a href="mailto:evsei@info.lt">evsei@info.lt</a></p></div>
+        <div><span class="info-label" data-i18n="contact_direct">Direct</span>
+          <p class="info-value font-headline"><a href="mailto:evsei@info.lt">evsei@info.lt</a></p>
+          <p class="info-value font-headline" style="margin-top:0.5rem;"><a href="tel:+37067464446">+370 674 64446</a></p>
+        </div>
         <div class="contact-social">
           <a href="https://www.instagram.com/evseilt/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_insta">Instagram</a>
           <a href="https://www.linkedin.com/in/erikas-jevseicikas-b6709b3ba/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_linkedin">LinkedIn</a>
