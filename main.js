@@ -1,0 +1,131 @@
+  // Language Management
+  class LanguageManager {
+    constructor() {
+      this.currentLang = localStorage.getItem('evsei_lang') || 'lt';
+      this.init();
+    }
+
+    init() {
+      this.updateUI();
+      this.applyTranslations();
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      document.querySelectorAll('.nav-lang span:not(.sep)').forEach(span => {
+        span.addEventListener('click', () => {
+          const lang = span.textContent.trim().toLowerCase() === 'english' || span.textContent.trim() === 'EN' ? 'en' : 'lt';
+          this.setLanguage(lang);
+        });
+      });
+    }
+
+    setLanguage(lang) {
+      if (this.currentLang === lang) return;
+      this.currentLang = lang;
+      localStorage.setItem('evsei_lang', lang);
+      this.updateUI();
+      this.applyTranslations();
+    }
+
+    updateUI() {
+      document.querySelectorAll('.nav-lang span:not(.sep)').forEach(span => {
+        const isEn = span.textContent.trim().toLowerCase() === 'english' || span.textContent.trim() === 'EN';
+        const targetLang = isEn ? 'en' : 'lt';
+        
+        if (targetLang === this.currentLang) {
+          span.classList.add('active');
+          span.classList.remove('inactive');
+        } else {
+          span.classList.add('inactive');
+          span.classList.remove('active');
+        }
+      });
+      document.documentElement.lang = this.currentLang;
+    }
+
+    applyTranslations() {
+      const texts = translations[this.currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (texts[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = texts[key];
+          } else if (key.includes('title') || key.includes('h2') || key.includes('h3')) {
+            el.innerHTML = texts[key];
+          } else {
+            el.textContent = texts[key];
+          }
+        }
+      });
+    }
+  }
+
+  // Initialize Language Manager
+  const langManager = new LanguageManager();
+
+  // Tab Navigation
+  function openTab(id) {
+    document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('[onclick="openTab(\'' + id + '\')"]').classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+
+  // Mobile Menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Cookie Banner
+  const banner = document.getElementById('cookie-banner');
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    banner.style.opacity = '0'; banner.style.transform = 'translateY(20px)';
+    setTimeout(() => banner.remove(), 400);
+  });
+  document.getElementById('cookieDetails').addEventListener('click', () => {
+    const details = {
+        lt: 'Naudojame analitinius slapukus, kad suprastume, kaip lankytojai bendrauja su mūsų svetaine. Jokie asmens duomenys nėra parduodami. Bet kada galite jų atsisakyti.',
+        en: 'We use analytics cookies to understand how visitors interact with our site. No personal data is sold. You can opt out at any time.'
+    };
+    alert(details[langManager.currentLang]);
+  });
+
+  // Form Submission
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    const originalText = btn.innerHTML;
+    const successText = langManager.currentLang === 'lt' ? 'Žinutė Išsiųsta ✓' : 'Message Sent ✓';
+    btn.innerHTML = successText;
+    setTimeout(() => { btn.innerHTML = originalText; this.reset(); }, 3000);
+  });
+
+  // Intersection Observer for Active Nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const activeNavLinks = document.querySelectorAll(`a[href="#${entry.target.id}"]`);
+        activeNavLinks.forEach(a => a.classList.add('active'));
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer.observe(s));
+
+  // Scroll to Top visibility
+  const scrollBtn = document.getElementById('scroll-top');
+  if (scrollBtn) {
+    window.addEventListener('scroll', () => { scrollBtn.classList.toggle('visible', window.scrollY > 600); });
+  }
