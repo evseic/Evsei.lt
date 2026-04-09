@@ -101,13 +101,41 @@
   });
 
   // Form Submission
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = this.querySelector('.btn-submit');
     const originalText = btn.innerHTML;
-    const successText = langManager.currentLang === 'lt' ? 'Žinutė Išsiųsta ✓' : 'Message Sent ✓';
-    btn.innerHTML = successText;
-    setTimeout(() => { btn.innerHTML = originalText; this.reset(); }, 3000);
+    
+    // Get form data
+    const formData = new FormData(this);
+    const leadData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      project_details: formData.get('message')
+    };
+
+    try {
+      btn.innerHTML = langManager.currentLang === 'lt' ? 'Siunčiama...' : 'Sending...';
+      btn.disabled = true;
+
+      const { error } = await supabase
+        .from('leads')
+        .insert([leadData]);
+
+      if (error) throw error;
+
+      const successText = langManager.currentLang === 'lt' ? 'Žinutė Išsiųsta ✓' : 'Message Sent ✓';
+      btn.innerHTML = successText;
+      this.reset();
+    } catch (err) {
+      console.error('Supabase error:', err);
+      btn.innerHTML = langManager.currentLang === 'lt' ? 'Klaida! Bandykite vėl' : 'Error! Try again';
+    } finally {
+      setTimeout(() => { 
+        btn.innerHTML = originalText; 
+        btn.disabled = false;
+      }, 3000);
+    }
   });
 
   // Intersection Observer for Active Nav
