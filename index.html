@@ -9,10 +9,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="contact-modal.css">
+<link rel="stylesheet" href="faq-modal.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabaseClient.js" defer></script>
 <script src="translations.js" defer></script>
 <script src="main.js" defer></script>
+<script src="contact-modal.js" defer></script>
+
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kiek kainuoja svetainės kūrimas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Svetainės kaina priklauso nuo projekto sudėtingumo, funkcionalumo ir tikslų. Paprastos verslo svetainės kainuoja mažiau, o sudėtingesni sprendimai (su integracijomis ar automatizacija) – daugiau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek laiko trunka sukurti svetainę?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standartinis svetainių kūrimas trunka per 2–4 savaites. Sudėtingesni projektai gali užtrukti ilgiau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar mano svetainė bus pritaikyta telefonams?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip. Visos mūsų kuriamos svetainės yra 100% pritaikytos mobiliesiems įrenginiams, greitos ir patogios naudoti."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -21,6 +58,7 @@
   <a href="#services" onclick="closeMobile()" data-i18n="nav_services">Services</a>
   <a href="#portfolio" onclick="closeMobile()" data-i18n="nav_portfolio">Portfolio</a>
   <a href="#blog" onclick="closeMobile()" data-i18n="nav_blog">Blog</a>
+  <a href="faq.html" onclick="closeMobile()" data-i18n="nav_faq">FAQ</a>
   <a href="#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
   <div class="mobile-lang">
     <div class="nav-lang">
@@ -39,6 +77,7 @@
       <li><a href="#services" data-i18n="nav_services">Services</a></li>
       <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
       <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="nav-lang">
@@ -318,25 +357,29 @@
       <h2 class="section-h2 font-headline" data-i18n="portfolio_title">Selected <br/>Works</h2>
       <span class="section-label muted" data-i18n="portfolio_label">01 — 03 / High Performance Projects</span>
     </div>
-    <div class="portfolio-grid">
-      <div class="work-card">
-        <div class="work-overlay">
-          <h3 class="work-title" data-i18n="work_1_title">Project 01</h3>
-        </div>
-        <img src="assets/images/work1.png" alt="Project 01" loading="lazy">
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="work-card">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_1_title">Beauty Salon</h3>
+        <div class="work-desc" data-i18n="work_1_desc">UI/UX Design & Development</div>
       </div>
-      <div class="work-card">
-        <div class="work-overlay">
-          <h3 class="work-title" data-i18n="work_2_title">Project 02</h3>
-        </div>
-        <img src="assets/images/work2.png" alt="Project 02" loading="lazy">
+      <img src="assets/images/work-1.webp" alt="Beauty Salon" loading="lazy">
+    </div>
+    <div class="work-card">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_2_title">Modern E-commerce</h3>
+        <div class="work-desc" data-i18n="work_2_desc">E-commerce Architecture</div>
       </div>
-      <div class="work-card">
-        <div class="work-overlay">
-          <h3 class="work-title" data-i18n="work_3_title">Project 03</h3>
-        </div>
-        <img src="assets/images/work3.png" alt="Project 03" loading="lazy">
+      <img src="assets/images/work-2.webp" alt="Modern E-commerce" loading="lazy">
+    </div>
+    <div class="work-card">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_3_title">Digital Agency</h3>
+        <div class="work-desc" data-i18n="work_3_desc">Corporate Digital Strategy</div>
       </div>
+      <img src="assets/images/work-3.webp" alt="Digital Agency" loading="lazy">
     </div>
   </div>
 </section>
@@ -395,26 +438,55 @@
       <a href="#contact" class="blog-view-all" data-i18n="blog_view_all">View All Articles</a>
     </div>
     <div class="blog-grid">
-      <div class="blog-card" onclick="location.href='#contact'">
-        <div class="blog-img-wrap"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfofTxB2UyEme4hQR-stXiUxHo7x-n8Tkfa7RT3eclTZzA8SWecm6RmtuxNMs13ADoXB_tWvTVfDJ-y1uFtWVM3kvnuV8CpLykdzgLPBZZ4Xbjf6Yb45ScxFqv8H-ecaQcg9vjiR_BRmrzJk8L8Y1Gy1Ee34ZCtA-KmpEMGlhI6W8WVLLwEphe7JrVkmBjpcR9XaC4wRk04b0PFCCv-JNhpLJmba-VgoHUYp38MY0WDvJOq9DBSEIWXDwF6J0QQCfhLa1aAntWvdJg" alt="blog1"/></div>
-        <span class="blog-meta"><span data-i18n="blog_1_cat">SEO</span> — <span data-i18n="blog_1_date">March 24, 2025</span></span>
-        <h3 class="blog-h3 font-headline" data-i18n="blog_1_title">How Local SEO is Changing for Lithuanian Businesses</h3>
-        <p class="blog-p" data-i18n="blog_1_desc">Explore the latest algorithm shifts and how they impact local service providers in the Baltic region...</p>
-        <button class="blog-read-more"><span data-i18n="blog_read">Read More</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></button>
+      <!-- Article 1 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_1_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="blog1"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_1_cat">AI Automation</span> — 
+          <span data-i18n="blog_1_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_1_title">AI Automation: How to Save 10+ Hours per Week</h3>
+        <p class="blog-p" data-i18n="blog_1_desc">Save 10+ hours per week by automating email, CRM, and socials. A complete guide to Make, Zapier, and n8n.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
       </div>
-      <div class="blog-card" onclick="location.href='#contact'">
-        <div class="blog-img-wrap"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEXLO-y00cUl1mSAgVQ0bIKyUD8IDvQKJopKNcS0jjdtAdf3MGMcDSqiTjczD4OTWZv8VRpaJEL4swDiwOLC3bTyeD7CcjdOtuu0AmVj8fUttlSNqm7dS6UwBAMyGLQPiBNyLqWV2rmxkmWN50ECXxU--JxZ4MH1dQik_Tbf8q1tn5sg8Gb6PofdqRux_I54u2Zadwwve7YySfG8eyElG6L-JQJpUvns-qf947FRONdw8emUyg_-CRNKafADiGPyzwziZkDp_EK86i" alt="blog2"/></div>
-        <span class="blog-meta"><span data-i18n="blog_2_cat">Performance</span> — <span data-i18n="blog_2_date">March 18, 2025</span></span>
-        <h3 class="blog-h3 font-headline" data-i18n="blog_2_title">The Speed Trap: Why Your Website Loads Slow and How We Fix It</h3>
-        <p class="blog-p" data-i18n="blog_2_desc">Speed isn't just a metric; it's a conversion driver. Learn the architectural secrets behind 0.5s load times...</p>
-        <button class="blog-read-more"><span data-i18n="blog_read">Read More</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></button>
+
+      <!-- Article 2 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_2_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="blog2"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_2_cat">Web Development</span> — 
+          <span data-i18n="blog_2_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_2_title">Professional Website for Vilnius Businesses in 2026</h3>
+        <p class="blog-p" data-i18n="blog_2_desc">8 must-have elements for your website in 2026, local pricing benchmarks, and tips for hiring the right agency.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
       </div>
-      <div class="blog-card" onclick="location.href='#contact'">
-        <div class="blog-img-wrap"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBGK24p8-M5UbW9k1c3-JwXfBwuY7O7vT17NzolLiekGY-Z1E64jVyYSowIe-fEXlBgsRjGjP3GC7BCduUg1AUz8EoFT1S-SGRZC_XLYQKmwPtCfM5qEekAdnrSXPV5XtjMnJlVIIFi07dtV_IrW9-jn3yrwnaWy4kqK_xNMTgHzAtEdXhSnxDjEi5yJpwJHmSDQ6EZH0nElRVLtYmwvoAcwTEeq_jTG_8ZdW0LpV1CLC7FyR2Z6ryTDUcMrQxK4WIwa2ZR5MJi4xw" alt="blog3"/></div>
-        <span class="blog-meta"><span data-i18n="blog_3_cat">Design</span> — <span data-i18n="blog_3_date">February 12, 2025</span></span>
-        <h3 class="blog-h3 font-headline" data-i18n="blog_3_title">Editorial Web Design: The Future of Professional Service Brands</h3>
-        <p class="blog-p" data-i18n="blog_3_desc">Why the standard template approach is failing high-end service providers and what's next for digital identity...</p>
-        <button class="blog-read-more"><span data-i18n="blog_read">Read More</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></button>
+
+      <!-- Article 3 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_3_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=800" alt="blog3"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_3_cat">Branding</span> — 
+          <span data-i18n="blog_3_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_3_title">Branding vs. Logo: A Guide for Lithuanian Startups</h3>
+        <p class="blog-p" data-i18n="blog_3_desc">Why your logo isn't your brand. Full branding process, budgets, and strategy for the Baltic startup scene.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
       </div>
     </div>
   </div>
@@ -442,7 +514,15 @@
         <div class="form-field"><input type="text" name="name" placeholder="Your Name" data-i18n="form_name" data-i18n-attr="placeholder" required/></div>
         <div class="form-field"><input type="email" name="email" placeholder="Email Address" data-i18n="form_email" data-i18n-attr="placeholder" required/></div>
         <div class="form-field"><input type="tel" name="phone" placeholder="Phone Number" data-i18n="form_phone" data-i18n-attr="placeholder"/></div>
-        <div class="form-field"><textarea name="message" rows="4" placeholder="Project Details" data-i18n="form_message" data-i18n-attr="placeholder"></textarea></div>
+        <div class="form-field">
+          <select name="project_details" required>
+            <option value="" disabled selected data-i18n="form_message">Project Details</option>
+            <option value="Web Design" data-i18n="service_web">Web Design</option>
+            <option value="Branding & Marketing" data-i18n="service_brand">Branding & Marketing</option>
+            <option value="SEO Optimization" data-i18n="service_seo">SEO Optimization</option>
+            <option value="AI Automation" data-i18n="service_ai">AI Automation (Coming soon)</option>
+          </select>
+        </div>
         <button type="submit" class="btn-submit"><span data-i18n="form_submit">Submit Project</span> <span class="submit-line"></span></button>
       </form>
     </div>
@@ -476,6 +556,8 @@
     <div class="footer-copy" data-i18n="footer_copy">© 2025 Evsei. All rights reserved.</div>
   </div>
 </footer>
+
+<!-- FAQ MODAL REMOVED -->
 
 <script src="translations.js"></script>
 <script src="main.js"></script>

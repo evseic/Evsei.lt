@@ -51,10 +51,24 @@
         if (texts[key]) {
           if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.placeholder = texts[key];
-          } else if (key.includes('title') || key.includes('h2') || key.includes('h3')) {
+          } else if (key.includes('title') || key.includes('h2') || key.includes('h3') || key.includes('desc')) {
             el.innerHTML = texts[key];
           } else {
             el.textContent = texts[key];
+          }
+        }
+      });
+
+      // Handle attribute translations (like links)
+      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        const attrMapping = el.getAttribute('data-i18n-attr').split(':');
+        const attrName = attrMapping[0];
+        const translationKey = attrMapping[1];
+        if (texts[translationKey]) {
+          if (attrName === 'onclick') {
+            el.setAttribute(attrName, `location.href='${texts[translationKey]}'`);
+          } else {
+            el.setAttribute(attrName, texts[translationKey]);
           }
         }
       });
@@ -112,7 +126,7 @@
       name: formData.get('name'),
       email: formData.get('email'),
       phone: formData.get('phone'),
-      project_details: formData.get('message')
+      project_details: formData.get('project_details')
     };
 
     try {
