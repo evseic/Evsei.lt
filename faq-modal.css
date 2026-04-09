@@ -1,4 +1,4 @@
-/* FAQ PAGE ACCORDION STYLES */
+/* FAQ PAGE ACCORDION STYLES - LIGHT THEME */
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
 }
 
 .faq-item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 37, 27, 0.1);
   padding: 1.5rem 0;
   transition: all 0.3s ease;
 }
@@ -18,7 +18,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: #fff;
+  color: #00251b;
   font-family: 'Manrope', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
@@ -36,7 +36,7 @@
 .faq-icon {
   font-size: 1.5rem;
   transition: transform 0.3s ease;
-  color: #00ff66;
+  color: #00251b;
 }
 
 .faq-item.active .faq-icon {
@@ -47,7 +47,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-  color: rgba(255, 255, 255, 0.7);
+  color: #404945;
   line-height: 1.6;
   font-size: 1rem;
 }
