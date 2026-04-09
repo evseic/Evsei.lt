@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const logoutBtn = document.getElementById('logoutBtn');
 
     // Check current session
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
     if (session) {
         showDashboard();
     }
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
         
         if (error) {
             authError.textContent = error.message;
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Handle Logout
     logoutBtn.addEventListener('click', async () => {
-        await supabase.auth.signOut();
+        await supabaseClient.auth.signOut();
         window.location.reload();
     });
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function fetchLeads() {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('leads')
             .select('*')
             .order('created_at', { ascending: false });

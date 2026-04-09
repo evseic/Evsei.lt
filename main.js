@@ -118,7 +118,7 @@
       btn.innerHTML = langManager.currentLang === 'lt' ? 'Siunčiama...' : 'Sending...';
       btn.disabled = true;
 
-      const { error } = await supabase
+      const { error } = await supabaseClient
         .from('leads')
         .insert([leadData]);
 
