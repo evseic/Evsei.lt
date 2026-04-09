@@ -360,21 +360,21 @@
   </div>
 
   <div class="portfolio-grid">
-    <div class="work-card">
+    <div class="work-card" onclick="openProject('./work-1.webp')">
       <div class="work-overlay">
         <h3 class="work-title" data-i18n="work_1_title">Beauty Salon</h3>
         <div class="work-desc" data-i18n="work_1_desc">UI/UX Design & Development</div>
       </div>
       <img src="./work-1.webp" alt="Beauty Salon">
     </div>
-    <div class="work-card">
+    <div class="work-card" onclick="openProject('./work-2.webp')">
       <div class="work-overlay">
         <h3 class="work-title" data-i18n="work_2_title">Modern E-commerce</h3>
         <div class="work-desc" data-i18n="work_2_desc">E-commerce Architecture</div>
       </div>
       <img src="./work-2.webp" alt="Modern E-commerce">
     </div>
-    <div class="work-card">
+    <div class="work-card" onclick="openProject('./work-3.webp')">
       <div class="work-overlay">
         <h3 class="work-title" data-i18n="work_3_title">Digital Agency</h3>
         <div class="work-desc" data-i18n="work_3_desc">Corporate Digital Strategy</div>
@@ -557,9 +557,17 @@
   </div>
 </footer>
 
-<!-- FAQ MODAL REMOVED -->
+<!-- PROJECT MODAL -->
+<div id="projectModal" class="project-modal" onclick="closeProject()">
+  <span class="modal-close" onclick="closeProject()">&times;</span>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <img id="modalImg" src="" alt="Project View">
+  </div>
+</div>
+
 
 <script src="translations.js"></script>
 <script src="main.js"></script>
+<script src="project-modal.js"></script>
 </body>
 </html>
