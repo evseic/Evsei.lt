@@ -80,12 +80,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             leadsTable.innerHTML = data.map(lead => `
                 <tr>
                     <td>
-                        <div class="lead-name">${escapeHtml(lead.name)}</div>
-                        <div class="lead-email">${escapeHtml(lead.email)}</div>
-                    </td>
-                    <td>
-                        <div class="lead-details" style="font-family: monospace;">${escapeHtml(lead.phone || '-')}</div>
-                    </td>
+                    <div class="lead-name">${escapeHtml(lead.name)}</div>
+                </td>
+                <td style="color: var(--primary); opacity: 0.9;">
+                    ${escapeHtml(lead.email)}
+                </td>
+                <td>
+                    <div class="lead-details" style="font-family: monospace;">${escapeHtml(lead.phone || '-')}</div>
+                </td>
                     <td>
                         <div class="lead-details">${escapeHtml(lead.project_details || 'No details provided.')}</div>
                     </td>
