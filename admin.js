@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>
                     <div class="lead-name">${escapeHtml(lead.name)}</div>
                 </td>
-                <td style="color: var(--primary); opacity: 0.9;">
-                    ${escapeHtml(lead.email)}
+                <td>
+                    <div class="lead-email">${escapeHtml(lead.email)}</div>
                 </td>
                 <td>
-                    <div class="lead-details" style="font-family: monospace;">${escapeHtml(lead.phone || '-')}</div>
+                    <div class="lead-phone" style="font-family: monospace;">${escapeHtml(lead.phone || '-')}</div>
                 </td>
                     <td>
                         <div class="lead-details">${escapeHtml(lead.project_details || 'No details provided.')}</div>
