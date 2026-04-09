@@ -111,6 +111,7 @@
     const leadData = {
       name: formData.get('name'),
       email: formData.get('email'),
+      phone: formData.get('phone'),
       project_details: formData.get('message')
     };
 

@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div class="lead-email">${escapeHtml(lead.email)}</div>
                     </td>
                     <td>
+                        <div class="lead-details" style="font-family: monospace;">${escapeHtml(lead.phone || '-')}</div>
+                    </td>
+                    <td>
                         <div class="lead-details">${escapeHtml(lead.project_details || 'No details provided.')}</div>
                     </td>
                     <td>

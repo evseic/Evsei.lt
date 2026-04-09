@@ -139,6 +139,7 @@ const translations = {
     contact_social_linkedin: "LinkedIn",
     form_name: "Jūsų vardas",
     form_email: "El. pašto adresas",
+    form_phone: "Telefono numeris",
     form_message: "Projekto detalės",
     form_submit: "Pateikti projektą",
 
@@ -319,6 +320,7 @@ const translations = {
     contact_social_linkedin: "LinkedIn",
     form_name: "Your Name",
     form_email: "Email Address",
+    form_phone: "Phone Number",
     form_message: "Project Details",
     form_submit: "Submit Project",
 
