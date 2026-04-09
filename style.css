@@ -271,16 +271,13 @@ footer { background:#021a13; padding:4rem 3rem; }
   .roadmap-steps { grid-template-columns:1fr 1fr; }
   .step { margin-bottom:3rem; }
   .roadmap-line { display:none; }
-  .portfolio-grid { grid-template-columns:1fr; }
-  .work-1,.work-2,.work-3 { grid-column:span 1; }
-  .work-2 { aspect-ratio:16/9; }
-  .work-3 { height:250px; }
-  .work-card { height: 75vh; }
+  .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .work-grid { align-items: stretch; }
-  .work-card { height: auto; max-height: none; overflow: visible; background: transparent; cursor: pointer; padding-bottom: 4rem; }
-  .work-overlay { position: static; padding: 0 0 1.5rem 0; background: none; }
-  .work-title { font-size: 1.25rem; font-weight: 900; }
-  .work-card img { height: 450px; object-fit: cover; object-position: top; border-radius: 0; }
+  .work-card { height: auto; max-height: none; overflow: visible; background: transparent; cursor: pointer; padding-bottom: 2rem; }
+  .work-overlay { position: static; padding: 0 0 0.75rem 0; background: none; }
+  .work-title { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 0.1rem; line-height: 1.2; }
+  .work-desc { font-size: 0.5rem; letter-spacing: 0.1em; }
+  .work-card img { height: 180px; object-fit: cover; object-position: top; border-radius: 0; }
   .pricing-grid { grid-template-columns:1fr; }
   .price-card.featured { transform:none; }
   .blog-grid { grid-template-columns:1fr; }
