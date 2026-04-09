@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Evsei - Frequently Asked Questions about high-end web design, branding, and SEO in Lithuania."/>
+<title>FAQ | Evsei — High-End Digital Architecture</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300251b'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%2300ff66'>E</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="faq-modal.css">
+<link rel="stylesheet" href="contact-modal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<script src="translations.js" defer></script>
+<script src="main.js" defer></script>
+<script src="contact-modal.js" defer></script>
+
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kiek kainuoja svetainės kūrimas?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Svetainės kaina priklauso nuo projekto sudėtingumo..." }
+    }
+  ]
+}
+</script>
+
+<style>
+  #faq-page { padding: 12rem 0; background: #0a0a0a; min-height: 100vh; }
+  .faq-page-content { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+  .faq-page-h1 { font-family: 'Manrope', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; color: #fff; margin-bottom: 4rem; letter-spacing: -0.04em; }
+  
+  @media (max-width: 900px) {
+    #faq-page { padding: 10rem 0; }
+  }
+  @media (max-width: 640px) {
+    #faq-page { padding: 8rem 0; }
+    .faq-page-h1 { font-size: 3rem; margin-bottom: 2.5rem; }
+  }
+  @media (max-width: 480px) {
+    .faq-page-h1 { font-size: 2.2rem; margin-bottom: 2rem; }
+    .faq-page-content { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#services" onclick="closeMobile()" data-i18n="nav_services">Services</a>
+  <a href="index.html#portfolio" onclick="closeMobile()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="index.html#blog" onclick="closeMobile()" data-i18n="nav_blog">Blog</a>
+  <a href="faq.html" class="active" onclick="closeMobile()" data-i18n="nav_faq">FAQ</a>
+  <a href="index.html#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
+  <div class="mobile-lang">
+    <div class="nav-lang">
+      <span class="active">LT</span>
+      <span class="sep">/</span>
+      <span class="inactive">EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a class="nav-logo" href="index.html">Evsei</a>
+    <ul class="nav-links">
+      <li><a href="index.html#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="index.html#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+      <li><a href="index.html#blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="faq.html" class="active" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-lang">
+      <span class="active">LT</span>
+      <span class="sep">/</span>
+      <span class="inactive">EN</span>
+    </div>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <a href="javascript:void(0)" onclick="openContact()" class="nav-cta-pill">
+    <span class="text" data-i18n="nav_cta">Book a free consultation</span>
+    <div class="nav-cta-icon"><span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span></div>
+  </a>
+</header>
+
+<main id="faq-page">
+  <div class="faq-page-content">
+    <h1 class="faq-page-h1" data-i18n="faq_title">Frequently Asked Questions</h1>
+    <div class="faq-container">
+      <!-- Accordion items loaded via logic or static placeholders -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q1">How much does a website cost?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a1">The cost depends on complexity...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q2">How long does it take?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a2">Standard websites take 2-4 weeks...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q3">Mobile friendly?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a3">Yes, 100% responsive...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q4">SEO?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a4">Yes, built with SEO foundations...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q5">More clients?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a5">SEO, Google Ads, and conversion design...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q6">AI automation?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a6">Automate customer care and lead gen...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q7">Edit myself?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a7">Yes, easy-to-use control system...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q8">Maintenance?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a8">Yes, updates and security support...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q9">Small business?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a9">Yes, we specialize in local growth...</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3 data-i18n="faq_q10">How to start?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p data-i18n="faq_a10">Contact us for a free consultation...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="admin.html" style="text-decoration:none; color:inherit;"><div class="footer-logo">Evsei</div></a>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://evsei.lt" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_linkedin">LinkedIn</a>
+      <a href="https://www.instagram.com/evseilt/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_insta">Instagram</a>
+      <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+      <a href="#" data-i18n="footer_cookie">Cookie Policy</a>
+    </div>
+    <div class="footer-copy" data-i18n="footer_copy">© 2025 Evsei. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Accordion Logic for the FAQ Page
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
