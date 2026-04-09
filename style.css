@@ -14,7 +14,8 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { font-family:'Inter',sans-serif; background:var(--surface); color:var(--on-surface); overflow-x:hidden; }
+body { font-family:'Inter',sans-serif; background:var(--surface); color:var(--on-surface); overflow-x:hidden; opacity: 0; transition: opacity 0.3s ease; }
+body.lang-ready { opacity: 1; }
 .font-headline { font-family:'Manrope',sans-serif; }
 .material-symbols-outlined { font-family:'Material Symbols Outlined'; font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
 
@@ -135,7 +136,7 @@ nav { width:100%; background:rgba(255,255,255,0.88); backdrop-filter:blur(20px);
 .portfolio-inner { max-width:88rem; margin:0 auto; }
 .section-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:5rem; flex-wrap:wrap; gap:2rem; }
 .section-h2 { font-family:'Manrope',sans-serif; font-size:clamp(3rem,7vw,5.5rem); font-weight:800; letter-spacing:-0.04em; line-height:1; }
-.portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; width:100%; }
+.portfolio-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; width:100%; overflow:hidden; }
 .work-card { 
   position:relative; 
   height:85vh; 
