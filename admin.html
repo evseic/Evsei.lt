@@ -1,94 +1,357 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evsei | Admin Panel</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300251b'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%2300ff66'>E</text></svg>"/>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --admin-bg: #000a07;
-            --admin-card: #001f16;
-            --admin-border: rgba(192,201,195,0.15);
+    <title>OnlyScout | Admin</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="L-Admin">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    colors: {
+                        dark: {  900: '#09090b', 800: '#18181b', 700: '#27272a' },
+                        gold: {  400: '#facc15', 500: '#eab308' }
+                    }
+                }
+            }
         }
-        body { background: var(--admin-bg); color: #fff; min-height: 100vh; font-family: 'Manrope', sans-serif; }
-        .admin-container { max-width: 1000px; margin: 4rem auto; padding: 0 2rem; }
-        .auth-card, .dashboard-card { background: var(--admin-card); border: 1px solid var(--admin-border); padding: 3rem; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .admin-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 2rem; color: #ffffff; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.8rem; text-transform: uppercase; color: #ffffff; letter-spacing: 0.1em; }
-        input { width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--admin-border); border-radius: 4px; color: #fff; font-family: inherit; }
-        input:focus { outline: none; border-color: var(--primary); }
-        .btn-admin { width: 100%; border: none; background: var(--primary); color: #000; padding: 1rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
-        .btn-admin:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,102,0.2); }
+    </script>
+    
+    <style>
+        body { background-color: #09090b; color: #fafafa; }
+        .glass-card {
+            background: rgba(24, 24, 27, 0.65);
+            backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .input-glow:focus { box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.2); border-color: rgba(250, 204, 21, 0.5); outline: none; }
         
-        /* Dashboard Styles */
-        .hidden { display: none !important; }
-        .admin-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-        .logout-btn { color: #ffffff; cursor: pointer; font-size: 0.9rem; text-decoration: underline; opacity: 1; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-        th { text-align: left; padding: 1rem; color: #ffffff; font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid var(--admin-border); opacity: 1; }
-        td { padding: 1.2rem 1rem; border-bottom: 1px solid var(--admin-border); vertical-align: top; font-size: 0.9rem; color: #ffffff; }
-        .lead-name { font-weight: 700; color: #ffffff; }
-        .lead-email { color: #ffffff; opacity: 1; }
-        .lead-date { font-size: 0.8rem; color: #ffffff; opacity: 0.8; }
-        .lead-details { line-height: 1.5; color: #ffffff; }
-        
-        .empty-state { text-align: center; padding: 4rem 0; color: #ffffff; }
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #18181b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-corner { background: #18181b; }
     </style>
 </head>
-<body>
-    <div class="admin-container">
-        <!-- Login Section -->
-        <div id="authSection" class="auth-card">
-            <h1 class="admin-title">Login.</h1>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit" class="btn-admin">Enter Dashboard</button>
-            </form>
-            <p id="authError" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 1rem;"></p>
+<body class="min-h-screen bg-dark-900 selection:bg-gold-500 selection:text-dark-900">
+
+    <!-- LOGIN VIEW -->
+    <div id="login-view" class="min-h-screen flex items-center justify-center p-4">
+        
+        <!-- Ambient Background Gradients -->
+        <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+            <div class="absolute top-[20%] left-[-10%] w-[40%] h-[40%] bg-gold-500/5 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-zinc-600/5 rounded-full blur-[100px]"></div>
         </div>
 
-        <!-- Dashboard Section -->
-        <div id="dashboardSection" class="hidden">
-            <div class="admin-nav">
-                <h1 class="admin-title">Leads.</h1>
-                <span id="logoutBtn" class="logout-btn">Sign Out</span>
-            </div>
+        <div class="glass-card rounded-3xl p-8 w-full max-w-md relative z-10">
+            <h2 class="text-3xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-yellow-200 tracking-tight">Панель управления</h2>
             
-            <div class="dashboard-card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 15%">Name</th>
-                            <th style="width: 20%">Email</th>
-                            <th style="width: 15%">Phone</th>
-                            <th>Project Details</th>
-                            <th style="width: 15%">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leadsTable">
-                        <!-- Leads injected here -->
-                    </tbody>
-                </table>
-                <div id="emptyState" class="empty-state hidden">No inquiries received yet.</div>
-            </div>
+            <form onsubmit="handleAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="email">Email</label>
+                    <input type="email" id="email" class="input-glow w-full p-4 rounded-xl bg-dark-900 border border-white/10 text-white placeholder-zinc-600" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="password">Пароль</label>
+                    <input type="password" id="password" class="input-glow w-full p-4 rounded-xl bg-dark-900 border border-white/10 text-white placeholder-zinc-600" required>
+                </div>
+                
+                <p id="auth-error" class="text-red-400 text-sm hidden text-center font-medium"></p>
+
+                <div class="flex gap-4 pt-4">
+                    <button type="submit" id="btn-login" class="flex-1 py-3 px-4 bg-gradient-to-r from-gold-400 to-yellow-500 text-dark-900 rounded-xl font-bold hover:scale-[1.02] transition-transform shadow-lg shadow-gold-500/20">Войти</button>
+                    <!-- Small signup button for initial setup -->
+                    <button type="button" id="btn-signup" onclick="handleSignUp()" class="flex-1 py-3 px-4 bg-dark-700 text-white rounded-xl font-bold hover:bg-dark-800 transition">Регистрация</button>
+                </div>
+                <p class="text-xs text-zinc-500 text-center mt-4">Введите почту и пароль и нажмите "Регистрация" (только для первого раза).</p>
+            </form>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabaseClient.js"></script>
-    <script src="admin.js"></script>
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboard-view" class="hidden min-h-screen flex-col p-4 md:p-8 relative z-10 max-w-[1600px] mx-auto">
+        <div class="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center mb-6 bg-dark-800/80 p-6 rounded-2xl border border-white/5 shadow-lg">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Список заявок (Leads)</h1>
+                <p class="text-zinc-400 mt-1">Все заполненные анкеты в реальном времени</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+                <button id="push-btn" onclick="subscribePush()" class="hidden py-2 px-4 bg-gold-500/10 text-gold-400 border border-gold-500/20 rounded-xl font-medium hover:bg-gold-500/20 transition text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    Включить уведомления
+                </button>
+                <button onclick="fetchLeads()" class="py-2 px-4 bg-dark-700 text-white border border-white/10 rounded-xl font-medium hover:bg-dark-600 transition text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Обновить
+                </button>
+                <button onclick="handleSignOut()" class="py-2 px-4 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-medium hover:bg-red-500/20 transition text-sm">Выйти</button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto bg-dark-800/80 rounded-2xl border border-white/5 shadow-lg flex-1">
+            <table class="w-full text-left text-sm whitespace-nowrap">
+                <thead class="text-xs text-zinc-400 uppercase bg-dark-900/80 border-b border-white/5 sticky top-0 z-10">
+                    <tr>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Дата</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Имя и Возраст</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">WhatsApp</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Telegram</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Национальность</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">OnlyFans</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Агентства</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Мастурбация/Лицо</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Кастомные видео</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Соцсети</th>
+                        <th class="px-6 py-4 font-semibold tracking-wide whitespace-nowrap">Фотографии</th>
+                    </tr>
+                </thead>
+                <tbody id="leads-body" class="divide-y divide-white/5">
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+            <p id="loading-text" class="text-center text-zinc-500 my-12 animate-pulse hidden">Загрузка данных...</p>
+        </div>
+    </div>
+
+    <script>
+        const supabaseUrl = 'https://lntjueljbkuzvykbkvjf.supabase.co';
+        const supabaseKey = 'sb_publishable_6u0O8xuSeVWZT0mlrD2Prg_Cyc1_X8f';
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        const loginView = document.getElementById('login-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const leadsBody = document.getElementById('leads-body');
+        const errorMsg = document.getElementById('auth-error');
+        const loadingText = document.getElementById('loading-text');
+
+        // Initial Auth check
+        supabaseClient.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        });
+
+        // Listen for Auth changes dynamically
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (session) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        });
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            errorMsg.classList.add('hidden');
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+            if (error) {
+                errorMsg.textContent = error.message;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        async function handleSignUp() {
+            errorMsg.classList.add('hidden');
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if(!email || !password) {
+                errorMsg.textContent = "Сначала заполните Email и Пароль, а затем нажмите Регистрация";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            const { data, error } = await supabaseClient.auth.signUp({ email, password });
+            if (error) {
+                errorMsg.textContent = error.message;
+                errorMsg.classList.remove('hidden');
+            } else {
+                alert("Аккаунт создан! Теперь вы авторизованы.");
+                // Supabase automatically signs in the user if email confirmation is off
+            }
+        }
+
+        async function handleSignOut() {
+            await supabaseClient.auth.signOut();
+        }
+
+        function showDashboard() {
+            loginView.classList.add('hidden');
+            dashboardView.classList.remove('hidden');
+            dashboardView.classList.add('flex');
+            fetchLeads();
+        }
+
+        function showLogin() {
+            loginView.classList.remove('hidden');
+            dashboardView.classList.add('hidden');
+            dashboardView.classList.remove('flex');
+            leadsBody.innerHTML = '';
+        }
+
+        async function fetchLeads() {
+            leadsBody.innerHTML = '';
+            loadingText.classList.remove('hidden');
+            
+            const { data, error } = await supabaseClient
+                .from('leads')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            loadingText.classList.add('hidden');
+            
+            if (error) {
+                console.error("Fetch leads error:", error);
+                leadsBody.innerHTML = `<tr><td colspan="12" class="text-center py-12 text-red-400 font-medium">Ошибка доступа. Убедитесь, что у вас есть права на чтение: ${error.message}</td></tr>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                leadsBody.innerHTML = `<tr><td colspan="12" class="text-center py-12 text-zinc-500 font-medium">Пока нет ни одной заявки</td></tr>`;
+                return;
+            }
+
+            leadsBody.innerHTML = data.map(lead => {
+                const date = new Date(lead.created_at).toLocaleString('ru-RU', { 
+                    day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' 
+                });
+                
+                // Parse WhatsApp and Telegram from the stored string
+                let waHandle = '-';
+                let tgHandle = '-';
+                let tgLink = '#';
+                
+                if (lead.telegram) {
+                    if (lead.telegram.includes(' | TG: ')) {
+                        const parts = lead.telegram.split(' | TG: ');
+                        waHandle = parts[0];
+                        tgHandle = parts[1];
+                    } else if (lead.telegram.includes(' | ')) {
+                        const parts = lead.telegram.split(' | ');
+                        waHandle = parts[0];
+                        tgHandle = parts[1];
+                    } else {
+                        // Fallback logic for older leads
+                        if (lead.telegram.includes('@') || lead.telegram.includes('t.me') || lead.telegram.toLowerCase().includes('tg')) {
+                            tgHandle = lead.telegram;
+                        } else {
+                            waHandle = lead.telegram;
+                        }
+                    }
+                }
+
+                if (tgHandle !== '-') {
+                    tgHandle = tgHandle.startsWith('@') ? tgHandle : tgHandle.includes('t.me') ? tgHandle : '@' + tgHandle;
+                    tgLink = tgHandle.includes('http') ? tgHandle : `https://t.me/${tgHandle.replace('@','')}`;
+                }
+                
+                const waLink = waHandle !== '-' ? `https://wa.me/${waHandle.replace(/[^0-9]/g, '')}` : '#';
+
+                return `
+                <tr class="hover:bg-dark-700/40 transition duration-150">
+                    <td class="px-6 py-4 text-zinc-400 whitespace-nowrap">${date}</td>
+                    <td class="px-6 py-4 font-bold text-white whitespace-nowrap">${lead.name} <span class="text-zinc-500 font-normal ml-1">(${lead.age || '-'})</span></td>
+                    <td class="px-6 py-4 font-medium text-green-400 whitespace-nowrap">${waHandle !== '-' ? `<a href="${waLink}" target="_blank" class="hover:text-green-300 transition shrink-0 flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>${waHandle}</a>` : '-'}</td>
+                    <td class="px-6 py-4 font-medium text-gold-400 whitespace-nowrap">${tgHandle !== '-' ? `<a href="${tgLink}" target="_blank" class="hover:text-gold-300 transition shrink-0 flex items-center gap-1"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.686c.223-.195-.054-.285-.346-.096l-6.405 4.042-2.76-.86c-.6-.182-.613-.604.126-.893l10.785-4.153c.498-.186.94.116.804.896z"/></svg>${tgHandle}</a>` : '-'}</td>
+                    <td class="px-6 py-4 font-medium text-zinc-200 whitespace-nowrap">${lead.location || '-'}</td>
+                    <td class="px-6 py-4 text-zinc-300 whitespace-nowrap">${styledBadge(lead.experience)}</td>
+                    <td class="px-6 py-4 text-zinc-300 whitespace-nowrap">${styledBadge(lead.time_commitment)}</td>
+                    <td class="px-6 py-4 text-zinc-300 whitespace-nowrap">${styledBadge(lead.reason)}</td>
+                    <td class="px-6 py-4 text-zinc-300 whitespace-nowrap">${styledBadge(lead.target_income)}</td>
+                    <td class="px-6 py-4 text-zinc-300 max-w-[200px] truncate whitespace-nowrap">${lead.socials ? formatSocials(lead.socials) : '-'}</td>
+                    <td class="px-6 py-4">${renderPhotos(lead.phone_type)}</td>
+                </tr>
+            `}).join('');
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(reg => {
+                    console.log('SW Registered!', reg);
+                    checkPushStatus(reg);
+                }).catch(err => console.log('SW Registration failed', err));
+            });
+        }
+
+        async function checkPushStatus(reg) {
+            const pushBtn = document.getElementById('push-btn');
+            if (!('PushManager' in window)) return;
+            
+            const subscription = await reg.pushManager.getSubscription();
+            if (!subscription) {
+                pushBtn.classList.remove('hidden');
+            }
+        }
+
+        async function subscribePush() {
+            const reg = await navigator.serviceWorker.ready;
+            const pushBtn = document.getElementById('push-btn');
+            
+            // This is a placeholder for OneSignal or VAPID logic
+            // Since we need a backend/provider, we'll suggest OneSignal here
+            alert("Для iPhone (iOS 16.4+) добавьте сайт на 'Главный экран', затем откройте его и разрешите уведомления.\n\nВ следующем обновлении мы добавим полную поддержку OneSignal/Telegram.");
+            
+            // Local notification test
+            if (Notification.permission === 'default') {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    new Notification("Уведомления включены!", {
+                        body: "Вы будете получать сообщения о новых заявках.",
+                        icon: "app_icon_512.png"
+                    });
+                    pushBtn.classList.add('hidden');
+                }
+            }
+        }
+
+        function renderPhotos(phone_typeStr) {
+            if(!phone_typeStr) return '<span class="text-zinc-600">-</span>';
+            try {
+                const photos = JSON.parse(phone_typeStr);
+                if(Array.isArray(photos) && photos.length > 0) {
+                    return `<div class="flex flex-wrap gap-2 min-w-[200px]">` + photos.map(p => `<a href="${p.data}" target="_blank" class="block"><img src="${p.data}" class="w-12 h-12 object-cover rounded-md border border-white/20 hover:scale-[3] origin-right transform transition duration-300 cursor-zoom-in shadow-xl relative z-10 hover:z-50" alt="${p.name || 'photo'}"></a>`).join('') + `</div>`;
+                }
+            } catch(e) { /* ignore */ }
+            return '<span class="text-zinc-600">-</span>';
+        }
+
+        function styledBadge(status) {
+            if(!status) return '<span class="text-zinc-600">-</span>';
+            if(status.includes('Да')) return `<span class="px-2.5 py-1 bg-green-500/10 text-green-400 rounded-lg text-xs font-bold border border-green-500/20 shadow-sm shadow-green-500/10">${status}</span>`;
+            return `<span class="px-2.5 py-1 bg-yellow-500/10 text-yellow-400 rounded-lg text-xs font-bold border border-yellow-500/20 shadow-sm shadow-yellow-500/10">${status}</span>`;
+        }
+        
+        function formatSocials(socials) {
+            if (!socials) return '-';
+            const s = socials.trim();
+            if (s.startsWith('http') || s.startsWith('@')) {
+                return `<span class="text-zinc-300 text-xs font-medium">${s}</span>`;
+            }
+            return `<span class="text-zinc-300 text-xs font-medium">@${s}</span>`;
+        }
+    </script>
 </body>
 </html>

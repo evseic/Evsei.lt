@@ -1,0 +1,17 @@
+{
+  "name": "liubliubabki.com Admin",
+  "short_name": "L-Admin",
+  "description": "Admin Panel for Agency Management",
+  "start_url": "/admin.html",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#facc15",
+  "icons": [
+    {
+      "src": "app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
