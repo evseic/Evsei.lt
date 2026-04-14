@@ -160,71 +160,137 @@
 <body class="bg-dark-900 selection:bg-gold-500 selection:text-dark-900">
 
     <!-- LANDING VIEW -->
-    <div id="landing-view" class="md:fixed md:inset-0 w-full min-h-screen md:h-screen flex flex-col md:flex-row bg-dark-900 view-active z-50 md:overflow-hidden overflow-x-hidden">
+    <div id="landing-view" class="w-full min-h-screen flex flex-col bg-dark-900 view-active z-50 overflow-x-hidden relative">
+        <div class="absolute top-6 right-6 z-[100] flex gap-2">
+            <button onclick="switchLanguage('en')" id="lang-btn-en" class="text-xs font-bold px-3 py-1.5 rounded-full border border-gold-500 text-dark-900 bg-gold-400 transition-colors">EN</button>
+            <a href="https://www.onlyscout.agency/es" id="lang-btn-es" class="text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 text-zinc-400 hover:text-white transition-colors cursor-pointer flex items-center justify-center decoration-transparent">ES</a>
+        </div>
         
         <!-- Ambient background -->
         <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-50">
             <div class="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-gold-500/10 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-zinc-600/10 rounded-full blur-[100px]"></div>
         </div>
 
-        <!-- Left Column (Text & Main CTA) -->
-        <div class="flex-none md:flex-1 flex flex-col justify-center p-8 pt-12 md:p-24 relative z-10">
-            <div class="max-w-2xl animate-fade-in-up">
-                <h1 data-i18n="hero_title" class="text-4xl md:text-6xl font-bold mb-6 md:mb-10 leading-[1.1] tracking-tight text-center md:text-left">
-                    Хочешь зарабатывать <br class="hidden md:block"> 
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500">от 2000$ в месяц,</span><br class="hidden md:block">
-                    снимая контент?
-                </h1>
-                
-                <p data-i18n="hero_subtitle" class="text-lg md:text-xl text-zinc-400 mb-10 md:mb-14 leading-relaxed max-wxl text-center md:text-left">
-                    Присоединяйся к нам — мы помогаем моделям расти и зарабатывать больше. Прозрачные условия и полная поддержка.
-                </p>
-                
-                <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-6">
-                    <button onclick="startQuizFromLanding()" data-i18n="hero_cta" class="w-full md:w-auto py-5 px-12 bg-gradient-to-r from-gold-400 to-yellow-500 text-dark-900 rounded-xl font-bold text-xl md:text-2xl transition-transform hover:scale-[1.03] active:scale-[0.98] shadow-xl shadow-gold-500/20">
-                        Начать
-                    </button>
-                    <div class="flex items-center gap-2 text-zinc-500 font-medium">
-                        <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"></path></svg>
-                        <span data-i18n="hero_time_hint" class="text-sm">Займет 2 минуты</span>
+        <div class="w-full flex-grow flex flex-col relative z-10 mx-auto max-w-5xl px-6 py-20 md:py-32">
+            
+            <!-- HERO SECTION -->
+            <div class="text-center md:text-center flex flex-col items-center gap-10 mb-16 md:mb-20">
+                <div class="w-full animate-fade-in-up">
+                    <h1 data-i18n="hero_title" class="text-5xl md:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+                        We Find You the <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500">OnlyFans Agency That Makes You the Most Money</span>
+                    </h1>
+                    
+                    <p data-i18n="hero_subtitle" class="text-xl md:text-2xl text-zinc-400 mb-10 leading-relaxed max-w-3xl mx-auto">
+                        OnlyScout connects models with the top-performing agencies in the industry — for free. No guesswork, no wasted time, no bad deals.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <button onclick="startQuizFromLanding()" data-i18n="hero_cta" class="w-full sm:w-auto py-5 px-12 bg-gradient-to-r from-gold-400 to-yellow-500 text-dark-900 rounded-xl font-bold text-xl md:text-2xl transition-transform hover:scale-[1.03] active:scale-[0.98] shadow-xl shadow-gold-500/20">
+                            Find My Agency →
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Right Content Section (Slider + Stats) -->
-        <div class="flex-none md:flex-1 flex flex-col justify-center items-center bg-dark-900/50 p-6 md:p-12 overflow-hidden">
-            <!-- Slider Wrapper -->
-            <div class="relative w-full max-w-2xl aspect-[1.4/1] md:aspect-[1.5/1] rounded-[2.5rem] overflow-hidden shadow-[0_32px_80px_-20px_rgba(0,0,0,0.9)] border border-white/10 z-10 animate-fade-in bg-zinc-950">
-                <div id="hero-slider" class="absolute inset-0 w-full h-full">
-                    <img src="/img/stat1.png" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 opacity-100" alt="Статистика заработка">
-                    <img src="/img/stat2.png" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" alt="Доходы">
-                    <img src="/img/stat3.png" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" alt="Результаты">
-                    <img src="/img/stat4.png" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 opacity-0" alt="Выплаты">
+
+            <!-- SOCIAL PROOF BAR -->
+            <div class="glass-card rounded-2xl flex flex-col md:flex-row items-center justify-center gap-4 py-6 px-10 text-sm md:text-lg text-zinc-300 font-medium mb-24 md:mb-32 mx-auto shadow-2xl">
+                <span data-i18n="social_proof_1">500+ models placed</span>
+                <span class="hidden md:inline text-gold-500">•</span>
+                <span data-i18n="social_proof_2">Top agency partners</span>
+                <span class="hidden md:inline text-gold-500">•</span>
+                <span data-i18n="social_proof_3">100% free for models</span>
+            </div>
+
+            <!-- HOW IT WORKS -->
+            <div class="mb-24 md:mb-32">
+                <h2 data-i18n="how_title" class="text-3xl md:text-5xl font-bold text-center mb-12 md:mb-16">Three steps to your best deal</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-3xl p-8 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 text-gold-400 border border-gold-500/30 flex items-center justify-center text-2xl font-bold mb-6">1</div>
+                        <h3 data-i18n="apply_title" class="text-2xl font-bold mb-4">Apply</h3>
+                        <p data-i18n="apply_desc" class="text-zinc-400 text-lg">Fill out a short form. Takes 2 minutes. No experience needed.</p>
+                    </div>
+                    <div class="glass-card rounded-3xl p-8 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 text-gold-400 border border-gold-500/30 flex items-center justify-center text-2xl font-bold mb-6">2</div>
+                        <h3 data-i18n="match_title" class="text-2xl font-bold mb-4">We Match You</h3>
+                        <p data-i18n="match_desc" class="text-zinc-400 text-lg">Our team reviews your profile and matches you with the agencies most likely to get you the highest earnings.</p>
+                    </div>
+                    <div class="glass-card rounded-3xl p-8 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-dark-700 text-gold-400 border border-gold-500/30 flex items-center justify-center text-2xl font-bold mb-6">3</div>
+                        <h3 data-i18n="choose_title" class="text-2xl font-bold mb-4">You Choose</h3>
+                        <p data-i18n="choose_desc" class="text-zinc-400 text-lg">We send you the offers. You pick the one that works best for you. No pressure, no obligation.</p>
+                    </div>
+                </div>
+                <div class="mt-12 flex justify-center">
+                    <button onclick="startQuizFromLanding()" class="group flex items-center gap-3 text-gold-400 font-bold text-xl hover:text-gold-300 transition-colors">
+                        <span data-i18n="how_cta">Get Matched Now</span>
+                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- Stats Block -->
-            <div class="w-full max-w-2xl mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-12 z-10 px-2 md:px-6 mb-12 md:mb-0">
-                <div class="flex flex-col items-center">
-                    <span class="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500 mb-1">
-                        40+
-                    </span>
-                    <span data-i18n="stat_models" class="text-[8px] md:text-xs text-zinc-500 uppercase tracking-widest font-bold text-center">Моделей</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-gold-400 to-yellow-600 mb-1">
-                        $1.5M+
-                    </span>
-                    <span data-i18n="stat_payouts" class="text-[8px] md:text-xs text-zinc-500 uppercase tracking-widest font-bold text-center">Выплаты</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <span class="text-2xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-zinc-500 mb-1">
-                        4
-                    </span>
-                    <span data-i18n="stat_years" class="text-[8px] md:text-xs text-zinc-500 uppercase tracking-widest font-bold text-center">Года</span>
+            <!-- WHY ONLYSCOUT -->
+            <div class="mb-24 md:mb-32">
+                <h2 data-i18n="why_title" class="text-3xl md:text-5xl font-bold text-center mb-12 md:mb-16">Why models choose OnlyScout</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    <div class="glass-card rounded-2xl p-8 border border-white/5 hover:border-gold-500/30 transition-colors">
+                        <h3 data-i18n="why1_t" class="text-xl md:text-2xl font-bold mb-3 text-white">We work for you, not the agencies</h3>
+                        <p data-i18n="why1_d" class="text-zinc-400 text-lg">Your best interest is our only priority. We negotiate to get you the best possible terms.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-8 border border-white/5 hover:border-gold-500/30 transition-colors">
+                        <h3 data-i18n="why2_t" class="text-xl md:text-2xl font-bold mb-3 text-white">We only work with vetted agencies</h3>
+                        <p data-i18n="why2_d" class="text-zinc-400 text-lg">No scams, no shady contracts. We personally review every agency in our network.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-8 border border-white/5 hover:border-gold-500/30 transition-colors">
+                        <h3 data-i18n="why3_t" class="text-xl md:text-2xl font-bold mb-3 text-white">You stay in control</h3>
+                        <p data-i18n="why3_d" class="text-zinc-400 text-lg">You review the offers, and you make the final call. We simply provide the opportunities.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-8 border border-white/5 hover:border-gold-500/30 transition-colors">
+                        <h3 data-i18n="why4_t" class="text-xl md:text-2xl font-bold mb-3 text-white">Results that speak</h3>
+                        <p data-i18n="why4_d" class="text-zinc-400 text-lg">Models in our network see consistent growth, clearer strategies, and higher monthly payouts.</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- OBJECTIONS / FAQ -->
+            <div class="mb-24 md:mb-32 max-w-3xl mx-auto w-full">
+                <h2 data-i18n="faq_title" class="text-3xl md:text-5xl font-bold text-center mb-12 md:mb-16">We know what you're thinking</h2>
+                <div class="space-y-4">
+                    <div class="glass-card rounded-2xl p-6 md:p-8">
+                        <h3 data-i18n="faq1_q" class="text-xl font-bold mb-2 text-gold-400">Is this free?</h3>
+                        <p data-i18n="faq1_a" class="text-zinc-300 text-lg">Yes, completely free for models. We only get paid a referral fee by the agency if you sign with them.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 md:p-8">
+                        <h3 data-i18n="faq2_q" class="text-xl font-bold mb-2 text-gold-400">Do I need experience?</h3>
+                        <p data-i18n="faq2_a" class="text-zinc-300 text-lg">No, we work with both brand-new and experienced models to find the perfect fit.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 md:p-8">
+                        <h3 data-i18n="faq3_q" class="text-xl font-bold mb-2 text-gold-400">What about my privacy?</h3>
+                        <p data-i18n="faq3_a" class="text-zinc-300 text-lg">We strictly protect your identity and never share your details without your explicit consent.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 md:p-8">
+                        <h3 data-i18n="faq4_q" class="text-xl font-bold mb-2 text-gold-400">What if I don't like the agencies?</h3>
+                        <p data-i18n="faq4_a" class="text-zinc-300 text-lg">You have absolutely zero obligation to sign any contract. You choose what works for you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINAL CTA -->
+            <div class="text-center glass-card border border-gold-500/20 rounded-[2.5rem] p-10 md:p-16 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-[-50%] left-[-10%] w-[120%] h-[120%] bg-gold-400/5 blur-[120px] rounded-full pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 data-i18n="final_title" class="text-4xl md:text-5xl font-bold mb-6">Ready to find out what you're worth?</h2>
+                    <p data-i18n="final_subtitle" class="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">
+                        Hundreds of models have already found their perfect agency through <span class="text-white font-medium">OnlyScout</span>. It takes 2 minutes to apply and costs you nothing.
+                    </p>
+                    <button onclick="startQuizFromLanding()" data-i18n="final_cta" class="w-full sm:w-auto py-5 px-12 bg-gradient-to-r from-gold-400 to-yellow-500 text-dark-900 rounded-xl font-bold text-xl md:text-2xl transition-transform hover:scale-[1.03] active:scale-[0.98] shadow-xl shadow-gold-500/20 mb-6">
+                        Apply Now — It's Free →
+                    </button>
+                    <p data-i18n="final_desc" class="text-zinc-500 text-sm md:text-base font-medium tracking-wide">No commitment. No hidden fees. Just better opportunities.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -366,9 +432,14 @@
                                        type="text" id="name" data-i18n="placeholder_name" placeholder="Например, Анна" required>
                             </div>
                             <div>
-                                <label data-i18n="label_telegram" class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="telegram">Твой Telegram / @username *</label>
+                                <label data-i18n="label_whatsapp" class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="whatsapp">WhatsApp *</label>
                                 <input class="input-glow w-full p-4 rounded-xl bg-dark-900 border border-white/10 text-white placeholder-zinc-600 transition-all" 
-                                       type="text" id="telegram" data-i18n="placeholder_telegram" placeholder="@username" required>
+                                       type="text" id="whatsapp" data-i18n="placeholder_whatsapp" placeholder="WhatsApp" required>
+                            </div>
+                            <div>
+                                <label data-i18n="label_telegram" class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="telegram">Твой Telegram / @username (заполни, если есть)</label>
+                                <input class="input-glow w-full p-4 rounded-xl bg-dark-900 border border-white/10 text-white placeholder-zinc-600 transition-all" 
+                                       type="text" id="telegram" data-i18n="placeholder_telegram" placeholder="@username">
                             </div>
                             <div>
                                 <label data-i18n="label_socials" class="block text-sm font-medium text-zinc-400 mb-1.5 ml-1" for="other-socials">Другие соц.сети (необязательно)</label>
@@ -434,59 +505,120 @@
 
         // i18n System
         const translations = {
-            ru: {
-                "hero_title": "Хочешь зарабатывать <br class=\"hidden md:block\"> <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500\">от 2000$ в месяц,</span><br class=\"hidden md:block\"> снимая контент?",
-                "hero_subtitle": "Присоединяйся к нам — мы помогаем моделям расти и зарабатывать больше. Прозрачные условия и полная поддержка.",
-                "hero_cta": "Начать",
-                "hero_time_hint": "Займет 2 минуты",
-                "stat_models": "Моделей",
-                "stat_payouts": "Выплаты",
-                "stat_years": "Года",
-                "progress_question_label": "Вопрос",
-                "progress_step": "Шаг {step} из {total}",
-                "progress_almost_done": "Почти готово!",
-                "progress_final_stage": "Финальный этап",
-                "q1_title": "Как тебя зовут?",
-                "q1_placeholder": "Твой ответ",
-                "q2_title": "Сколько тебе лет?",
-                "q2_placeholder": "Твой ответ",
-                "q3_title": "Какая у тебя национальность?",
-                "q3_placeholder": "Твой ответ",
-                "q4_title": "У тебя есть зарегистрированный профиль в OnlyFans?",
-                "q5_title": "Работал(а) ли ты раньше с агентствами?",
-                "q6_title": "Пожалуйста, отправь от 3 до 5 своих фотографий, где видно лицо и фигуру (не обязательно ню). Фото не должны быть отредактированы или с фильтрами.",
-                "q6_error": "Пожалуйста, загрузи от 3 до 5 фото.",
-                "q7_title": "Готова ли ты снимать мастурбацию и показывать лицо?",
-                "q8_title": "Готова ли ты делать персонализированные видео? (Персонализированные видео должны быть выполнены в течение 24–48 часов.)",
-                "btn_yes": "Да",
-                "btn_no": "Нет",
-                "btn_next": "Далее",
-                "form_percentage": "Анкета заполнена на 100%",
-                "form_title": "Последний шаг",
-                "form_desc": "Оставь свои контакты, и наш менеджер свяжется с тобой в течение 15 минут.",
-                "label_name": "Имя *",
-                "placeholder_name": "Например, Анна",
-                "label_telegram": "Ваш Telegram или WhatsApp / @имя_пользователя *",
+            en: {
+                "hero_title": "We Find You the <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500\">OnlyFans Agency That Makes You the Most Money</span>",
+                "hero_subtitle": "OnlyScout connects models with the top-performing agencies in the industry — for free. No guesswork, no wasted time, no bad deals.",
+                "hero_cta": "Find My Agency →",
+                "social_proof_1": "500+ models placed",
+                "social_proof_2": "Top agency partners",
+                "social_proof_3": "100% free for models",
+                "how_title": "Three steps to your best deal",
+                "apply_title": "Apply",
+                "apply_desc": "Fill out a short form. Takes 2 minutes. No experience needed.",
+                "match_title": "We Match You",
+                "match_desc": "Our team reviews your profile and matches you with the agencies most likely to get you the highest earnings.",
+                "choose_title": "You Choose",
+                "choose_desc": "We send you the offers. You pick the one that works best for you. No pressure, no obligation.",
+                "how_cta": "Get Matched Now",
+                "why_title": "Why models choose OnlyScout",
+                "why1_t": "We work for you, not the agencies",
+                "why1_d": "Your best interest is our only priority. We negotiate to get you the best possible terms.",
+                "why2_t": "We only work with vetted agencies",
+                "why2_d": "No scams, no shady contracts. We personally review every agency in our network.",
+                "why3_t": "You stay in control",
+                "why3_d": "You review the offers, and you make the final call. We simply provide the opportunities.",
+                "why4_t": "Results that speak",
+                "why4_d": "Models in our network see consistent growth, clearer strategies, and higher monthly payouts.",
+                "faq_title": "We know what you're thinking",
+                "faq1_q": "Is this free?",
+                "faq1_a": "Yes, completely free for models. We only get paid a referral fee by the agency if you sign with them.",
+                "faq2_q": "Do I need experience?",
+                "faq2_a": "No, we work with both brand-new and experienced models to find the perfect fit.",
+                "faq3_q": "What about my privacy?",
+                "faq3_a": "We strictly protect your identity and never share your details without your explicit consent.",
+                "faq4_q": "What if I don't like the agencies?",
+                "faq4_a": "You have absolutely zero obligation to sign any contract. You choose what works for you.",
+                "final_title": "Ready to find out what you're worth?",
+                "final_subtitle": "Hundreds of models have already found their perfect agency through <span class=\"text-white font-medium\">OnlyScout</span>. It takes 2 minutes to apply and costs you nothing.",
+                "final_cta": "Apply Now — It's Free →",
+                "final_desc": "No commitment. No hidden fees. Just better opportunities.",
+                "progress_question_label": "Question",
+                "progress_step": "Step {step} of {total}",
+                "progress_almost_done": "Almost done!",
+                "progress_final_stage": "Final stage",
+                "q1_title": "What is your name?",
+                "q1_placeholder": "Your answer",
+                "q2_title": "How old are you?",
+                "q2_placeholder": "Your answer",
+                "q3_title": "What is your nationality?",
+                "q3_placeholder": "Your answer",
+                "q4_title": "Do you have a registered OnlyFans profile?",
+                "q5_title": "Have you worked with agencies before?",
+                "q6_title": "Please send 3 to 5 photos showing your face and figure (nude is not required). Photos must not be edited or have filters.",
+                "q6_error": "Please upload 3 to 5 photos.",
+                "q7_title": "Are you willing to film masturbation and show your face?",
+                "q8_title": "Are you willing to make custom videos? (Custom videos must be completed within 24–48 hours.)",
+                "btn_yes": "Yes",
+                "btn_no": "No",
+                "btn_next": "Next",
+                "form_percentage": "Form 100% completed",
+                "form_title": "Final step",
+                "form_desc": "Leave your details and our manager will contact you within 15 minutes.",
+                "label_name": "Name *",
+                "placeholder_name": "e.g., Anna",
+                "label_whatsapp": "WhatsApp *",
+                "placeholder_whatsapp": "WhatsApp number",
+                "label_telegram": "Your Telegram / @username (optional)",
                 "placeholder_telegram": "@username",
-                "label_socials": "Другие соц.сети (необязательно)",
-                "placeholder_socials": "Ссылка на Instagram/TikTok",
-                "label_consent": "Я соглашаюсь на использование файлов cookie и обработку персональных данных *",
-                "error_missing": "Пожалуйста, заполни все обязательные поля.",
-                "error_consent": "Необходимо согласие на обработку данных (поставьте галочку).",
-                "btn_submit": "Отправить заявку",
-                "btn_submitting": "Отправка...",
-                "success_title": "Заявка принята!",
-                "success_desc": "Спасибо за доверие. Наш менеджер свяжется с тобой в самое ближайшее время.",
-                "btn_back": "К предыдущему шагу"
+                "label_socials": "Other social media (optional)",
+                "placeholder_socials": "Link to Instagram/TikTok",
+                "label_consent": "I agree to the use of cookies and the processing of personal data *",
+                "error_missing": "Please fill in all required fields.",
+                "error_consent": "Consent to data processing is required (check the box).",
+                "error_age": "You must be at least 18 years old to apply.",
+                "btn_submit": "Submit application",
+                "btn_submitting": "Submitting...",
+                "success_title": "Application received!",
+                "success_desc": "Thank you for your trust. Our manager will contact you very soon.",
+                "btn_back": "Back to previous step"
             },
             es: {
-                "hero_title": "¿Quieres ganar <br class=\"hidden md:block\"> <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500\">más de $2000 al mes</span><br class=\"hidden md:block\"> creando contenido?",
-                "hero_subtitle": "Únete a nosotros: ayudamos a las modelos a crecer y ganar más. Condiciones transparentes y apoyo total.",
-                "hero_cta": "Empezar",
-                "hero_time_hint": "Toma 2 minutos",
-                "stat_models": "Modelos",
-                "stat_payouts": "Pagos",
-                "stat_years": "Años",
+                "hero_title": "Te Encontramos la <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-yellow-200 to-gold-500\">Agencia de OnlyFans Que Te Hará Ganar Más Dinero</span>",
+                "hero_subtitle": "OnlyScout conecta a modelos con las agencias de mayor rendimiento de la industria, gratis. Sin adivinanzas, sin pérdida de tiempo, sin malos tratos.",
+                "hero_cta": "Encontrar Mi Agencia →",
+                "social_proof_1": "500+ modelos posicionadas",
+                "social_proof_2": "Las mejores agencias asociadas",
+                "social_proof_3": "100% gratis para modelos",
+                "how_title": "Tres pasos para tu mejor trato",
+                "apply_title": "Aplica",
+                "apply_desc": "Completa un breve formulario. Toma 2 minutos. No necesitas experiencia.",
+                "match_title": "Te Emparejamos",
+                "match_desc": "Nuestro equipo revisa tu perfil y te empareja con las agencias más propensas a conseguirte las mayores ganancias.",
+                "choose_title": "Tú Eliges",
+                "choose_desc": "Te enviamos las ofertas. Tú eliges la que mejor te funcione. Sin presión, sin compromiso.",
+                "how_cta": "Emparejarme Ahora",
+                "why_title": "Por qué las modelos eligen OnlyScout",
+                "why1_t": "Trabajamos para ti, no para las agencias",
+                "why1_d": "Tu mejor interés es nuestra única prioridad. Negociamos para conseguirte los mejores términos posibles.",
+                "why2_t": "Solo trabajamos con agencias verificadas",
+                "why2_d": "Sin estafas, sin contratos dudosos. Revisamos personalmente cada agencia de nuestra red.",
+                "why3_t": "Tú mantienes el control",
+                "why3_d": "Revisas las ofertas y tomas la decisión final. Nosotros simplemente proporcionamos las oportunidades.",
+                "why4_t": "Resultados que hablan",
+                "why4_d": "Las modelos de nuestra red ven un crecimiento constante, estrategias más claras y mayores pagos mensuales.",
+                "faq_title": "Sabemos lo que estás pensando",
+                "faq1_q": "¿Es gratis?",
+                "faq1_a": "Sí, completamente gratis para las modelos. Solo recibimos una tarifa de referencia por parte de la agencia si firmas con ellos.",
+                "faq2_q": "¿Necesito experiencia?",
+                "faq2_a": "No, trabajamos tanto con modelos nuevas como con experiencia para encontrar la combinación perfecta.",
+                "faq3_q": "¿Qué pasa con mi privacidad?",
+                "faq3_a": "Protegemos estrictamente tu identidad y nunca compartimos tus detalles sin tu consentimiento explícito.",
+                "faq4_q": "¿Qué pasa si no me gustan las agencias?",
+                "faq4_a": "No tienes ninguna obligación de firmar ningún contrato. Tú eliges lo que funciona para ti.",
+                "final_title": "¿Lista para descubrir lo que vales?",
+                "final_subtitle": "Cientos de modelos ya han encontrado su agencia perfecta a través de <span class=\"text-white font-medium\">OnlyScout</span>. Toma 2 minutos aplicar y no te cuesta nada.",
+                "final_cta": "Aplica Ahora — Es Gratis →",
+                "final_desc": "Sin compromiso. Sin tarifas ocultas. Solo mejores oportunidades.",
                 "progress_question_label": "Pregunta",
                 "progress_step": "Paso {step} de {total}",
                 "progress_almost_done": "¡Casi listo!",
@@ -511,13 +643,16 @@
                 "form_desc": "Deja tus datos y nuestro manager se pondrá en contacto contigo en 15 minutos.",
                 "label_name": "Nombre *",
                 "placeholder_name": "Por ejemplo, Ana",
-                "label_telegram": "Tu Telegram o WhatsApp / @usuario *",
+                "label_whatsapp": "WhatsApp *",
+                "placeholder_whatsapp": "Número de WhatsApp",
+                "label_telegram": "Tu Telegram / @usuario (opcional)",
                 "placeholder_telegram": "@usuario",
                 "label_socials": "Otras redes sociales (opcional)",
                 "placeholder_socials": "Enlace a Instagram/TikTok",
                 "label_consent": "Acepto el uso de cookies y el procesamiento de mis datos personales *",
                 "error_missing": "Por favor, completa todos los campos obligatorios.",
                 "error_consent": "Se requiere el consentimiento para el procesamiento de datos (marca la casilla).",
+                "error_age": "Debes tener al menos 18 años para aplicar.",
                 "btn_submit": "Enviar solicitud",
                 "btn_submitting": "Enviando...",
                 "success_title": "¡Solicitud recibida!",
@@ -526,7 +661,7 @@
             }
         };
 
-        const currentLang = window.location.pathname.toLowerCase().split('/').includes('es') ? 'es' : 'ru';
+        let currentLang = localStorage.getItem('onlyscout_lang') || (window.location.pathname.toLowerCase().split('/').includes('es') ? 'es' : 'en');
 
         function applyTranslations() {
             const t = translations[currentLang];
@@ -541,6 +676,25 @@
                 }
             });
             document.documentElement.lang = currentLang;
+            
+            // Update UI switcher active states
+            const enBtn = document.getElementById('lang-btn-en');
+            const esBtn = document.getElementById('lang-btn-es');
+            if (enBtn && esBtn) {
+                if (currentLang === 'en') {
+                    enBtn.className = "text-xs font-bold px-3 py-1.5 rounded-full border border-gold-500 text-dark-900 bg-gold-400 transition-colors";
+                    esBtn.className = "text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 text-zinc-400 hover:text-white transition-colors cursor-pointer";
+                } else {
+                    esBtn.className = "text-xs font-bold px-3 py-1.5 rounded-full border border-gold-500 text-dark-900 bg-gold-400 transition-colors";
+                    enBtn.className = "text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 text-zinc-400 hover:text-white transition-colors cursor-pointer";
+                }
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('onlyscout_lang', lang);
+            applyTranslations();
         }
 
         // State Management
@@ -659,10 +813,22 @@
         function handleTextInput(field, inputId, errorId) {
             const inputEl = document.getElementById(inputId);
             const errEl = document.getElementById(errorId);
+            
             if(!inputEl.value.trim()) {
+                errEl.textContent = translations[currentLang].error_missing || 'Error';
                 errEl.classList.remove('hidden');
                 return;
             }
+            
+            if(field === 'quiz_age') {
+                const ageNum = parseInt(inputEl.value.trim(), 10);
+                if(isNaN(ageNum) || ageNum < 18) {
+                    errEl.textContent = translations[currentLang]?.error_age || 'Вам должно быть от 18 лет.';
+                    errEl.classList.remove('hidden');
+                    return;
+                }
+            }
+            
             errEl.classList.add('hidden');
             formData[field] = inputEl.value.trim();
             nextStep();
@@ -793,16 +959,105 @@
                 setTimeout(() => progressContainer.classList.add('hidden'), 500);
             }
         }
+        // TELEGRAM CONFIGURATION
+        const TELEGRAM_BOT_TOKEN = "8777803315:AAG9JBPYyOUymcXQLaw9wI2utF6GZRlf1O8"; 
+        const TELEGRAM_CHAT_ID = "6324842399";     
+        
+        async function sendToTelegram(formDataObj) {
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+            
+            // Build the caption text matching the exact requested structure
+            const text = `1. What is your name and age?
+${formDataObj.quiz_name || 'N/A'} - ${formDataObj.quiz_age || 'N/A'} years old
+
+2. What is your nationality?
+${formDataObj.nationality || 'N/A'}
+
+3. Do you have a registered OnlyFans profile?
+${formDataObj.has_onlyfans || 'N/A'}
+
+4. Have you worked with agencies before?
+${formDataObj.has_agencies || 'N/A'}
+
+5. Please send 3-5 photos of yourself...
+(See attached media)
+
+6. Are you willing to film masturbation and show your face in the content?
+${formDataObj.will_show_face || 'N/A'}
+
+7. Are you willing to make custom videos? (Custom videos must be completed within 24-48 hours.)
+${formDataObj.will_do_custom || 'N/A'}`;
+
+            try {
+                // MESSAGE 1: Contacts
+                const contactText = `Новая заявка! / New Lead
+Name: ${formDataObj.name || 'N/A'}
+WhatsApp: ${formDataObj.whatsapp}
+Telegram: ${formDataObj.telegram || '-'}`;
+
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: contactText })
+                });
+
+                // MESSAGE 2: Quiz answers (and photos if exist)
+                if (!formDataObj.photos || formDataObj.photos.length === 0) {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: text })
+                    });
+                    return;
+                }
+
+                // If photos exist, we use sendMediaGroup via FormData
+                const tgFormData = new FormData();
+                tgFormData.append('chat_id', TELEGRAM_CHAT_ID);
+
+                const media = [];
+                formDataObj.photos.forEach((photoObj, index) => {
+                    const byteString = atob(photoObj.data.split(',')[1]);
+                    const mimeString = photoObj.data.split(',')[0].split(':')[1].split(';')[0];
+                    const ab = new ArrayBuffer(byteString.length);
+                    const ia = new Uint8Array(ab);
+                    for (let i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+                    const blob = new Blob([ab], {type: mimeString});
+                    
+                    const filename = photoObj.name || `photo${index}.jpg`;
+                    tgFormData.append(filename, blob, filename);
+                    
+                    media.push({
+                        type: 'photo',
+                        media: `attach://${filename}`,
+                        caption: index === 0 ? text : undefined
+                    });
+                });
+
+                tgFormData.append('media', JSON.stringify(media));
+
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMediaGroup`, {
+                    method: 'POST',
+                    body: tgFormData
+                });
+
+            } catch(e) {
+                console.error("Telegram send error:", e);
+            }
+        }
 
         async function submitForm() {
             const nameInput = document.getElementById('name');
+            const whatsappInput = document.getElementById('whatsapp');
             const tgInput = document.getElementById('telegram');
             const errorMsg = document.getElementById('form-error');
             const submitBtn = document.getElementById('submit-btn');
             const otherSocials = document.getElementById('other-socials');
             const cookieConsent = document.getElementById('cookie-consent');
             
-            if(!nameInput.value.trim() || !tgInput.value.trim() || !cookieConsent.checked) {
+            if(!nameInput.value.trim() || !whatsappInput.value.trim() || !cookieConsent.checked) {
                 if(!cookieConsent.checked) {
                     errorMsg.textContent = translations[currentLang].error_consent;
                 } else {
@@ -820,7 +1075,8 @@
             
             errorMsg.classList.add('hidden');
             formData['name'] = nameInput.value;
-            formData['telegram'] = tgInput.value;
+            formData['whatsapp'] = whatsappInput.value;
+            formData['telegram'] = tgInput.value.trim() || null;
             formData['socials'] = otherSocials.value.trim() || null;
             
             if(submitBtn) {
@@ -835,7 +1091,7 @@
                     .insert([
                         { 
                             name: formData.quiz_name && formData.quiz_name.trim().toLowerCase() !== formData.name.trim().toLowerCase() ? formData.quiz_name + ' / ' + formData.name : formData.name,
-                            telegram: formData.telegram,
+                            telegram: formData.whatsapp + (formData.telegram ? ' | TG: ' + formData.telegram : ''),
                             socials: formData.socials || null,
                             age: formData.quiz_age || null,
                             location: formData.nationality || null,
@@ -862,6 +1118,10 @@
                 if (typeof fbq === 'function') {
                     fbq('track', 'Lead');
                 }
+                
+                // Send to direct Telegram Bot
+                await sendToTelegram(formData);
+                
                 nextStep();
                 
             } catch (err) {
