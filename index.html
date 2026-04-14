@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Evsei — High-end web design, branding, SEO and AI automation for businesses in Lithuania and the Baltic region."/>
+<title>Evsei | High-End Digital Architecture</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300251b'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%2300ff66'>E</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="contact-modal.css">
+<link rel="stylesheet" href="faq-modal.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabaseClient.js" defer></script>
+<script src="translations.js" defer></script>
+<script src="main.js" defer></script>
+<script src="contact-modal.js" defer></script>
+
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kiek kainuoja svetainės kūrimas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Svetainės kaina priklauso nuo projekto sudėtingumo, funkcionalumo ir tikslų. Paprastos verslo svetainės kainuoja mažiau, o sudėtingesni sprendimai (su integracijomis ar automatizacija) – daugiau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek laiko trunka sukurti svetainę?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standartinis svetainių kūrimas trunka per 2–4 savaites. Sudėtingesni projektai gali užtrukti ilgiau."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar mano svetainė bus pritaikyta telefonams?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip. Visos mūsų kuriamos svetainės yra 100% pritaikytos mobiliesiems įrenginiams, greitos ir patogios naudoti."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()" data-i18n="nav_services">Services</a>
+  <a href="#portfolio" onclick="closeMobile()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="#blog" onclick="closeMobile()" data-i18n="nav_blog">Blog</a>
+  <a href="faq.html" onclick="closeMobile()" data-i18n="nav_faq">FAQ</a>
+  <a href="#contact" onclick="closeMobile()" data-i18n="nav_contact">Contact</a>
+  <div class="mobile-lang">
+    <div class="nav-lang">
+      <span class="active">LT</span>
+      <span class="sep">/</span>
+      <span class="inactive">EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a class="nav-logo" href="#">Evsei</a>
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+      <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+      <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-lang">
+      <span class="active">LT</span>
+      <span class="sep">/</span>
+      <span class="inactive">EN</span>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <a href="#contact" class="nav-cta-pill">
+    <span class="text" data-i18n="nav_cta">Book a free consultation</span>
+    <div class="nav-cta-icon">
+      <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
+    </div>
+  </a>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <svg id="eye-canvas" viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#001f16"/><stop offset="100%" stop-color="#000a07"/></radialGradient>
+        <radialGradient id="irisGrad" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#22ff88"/><stop offset="30%" stop-color="#00cc55"/><stop offset="65%" stop-color="#007733"/><stop offset="100%" stop-color="#003318"/></radialGradient>
+        <radialGradient id="pupilGrad" cx="38%" cy="35%" r="70%"><stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient>
+        <radialGradient id="glintGrad" cx="30%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="100%" stop-color="#aaffcc" stop-opacity="0"/></radialGradient>
+        <radialGradient id="scleraGrad" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#e8f5ee"/><stop offset="70%" stop-color="#c8e8d8"/><stop offset="100%" stop-color="#9acfb4"/></radialGradient>
+        <filter id="eyeGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="softGlow"><feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <clipPath id="eyeClip"><ellipse cx="600" cy="350" rx="230" ry="112"/></clipPath>
+      </defs>
+      <rect width="1200" height="480" fill="url(#bgGrad)"/>
+      <g stroke="#00ff6620" stroke-width="0.5">
+        <line x1="0" y1="175" x2="1200" y2="175"/><line x1="0" y1="350" x2="1200" y2="350"/>
+        <line x1="300" y1="0" x2="300" y2="700"/><line x1="600" y1="0" x2="600" y2="700"/><line x1="900" y1="0" x2="900" y2="700"/>
+      </g>
+      <circle cx="600" cy="350" r="175" fill="none" stroke="#00ff66" stroke-width="1"><animate attributeName="r" values="175;183;175" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.08;0.2;0.08" dur="4s" repeatCount="indefinite"/></circle>
+      <circle cx="600" cy="350" r="148" fill="none" stroke="#00ff66" stroke-width="0.8"><animate attributeName="r" values="148;155;148" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.12;0.25;0.12" dur="3.2s" repeatCount="indefinite"/></circle>
+      <g opacity="0.5">
+        <circle cx="420" cy="270" r="2" fill="#00ff88" style="--dx:-18px;--dy:-22px;animation:particleFloat 7s ease-in-out infinite;"/>
+        <circle cx="780" cy="285" r="1.5" fill="#00ee77" style="--dx:15px;--dy:-18px;animation:particleFloat 9s ease-in-out 1s infinite;"/>
+        <circle cx="500" cy="430" r="1.8" fill="#00ff66" style="--dx:-12px;--dy:20px;animation:particleFloat 6s ease-in-out 2s infinite;"/>
+        <circle cx="710" cy="440" r="2" fill="#44ffaa" style="--dx:20px;--dy:15px;animation:particleFloat 8s ease-in-out 0.5s infinite;"/>
+        <circle cx="460" cy="340" r="1.2" fill="#00ff99" style="--dx:-8px;--dy:-14px;animation:particleFloat 5s ease-in-out 3s infinite;"/>
+        <circle cx="740" cy="360" r="1.5" fill="#00ff77" style="--dx:10px;--dy:10px;animation:particleFloat 7.5s ease-in-out 1.5s infinite;"/>
+        <circle cx="340" cy="310" r="1" fill="#00dd66" style="--dx:-20px;--dy:8px;animation:particleFloat 11s ease-in-out 4s infinite;"/>
+        <circle cx="860" cy="395" r="1.2" fill="#22ff88" style="--dx:18px;--dy:-10px;animation:particleFloat 9.5s ease-in-out 2.5s infinite;"/>
+      </g>
+      <g style="transform-origin:600px 350px;animation:blink 6s ease-in-out infinite;">
+        <ellipse cx="600" cy="350" rx="230" ry="112" fill="url(#scleraGrad)" filter="url(#eyeGlow)"/>
+        <g clip-path="url(#eyeClip)">
+          <circle cx="600" cy="350" r="95" fill="url(#irisGrad)" style="animation:irisGlow 3s ease-in-out infinite;"/>
+          <circle cx="600" cy="350" r="88" fill="none" stroke="#00ff6640" stroke-width="1.5"/>
+          <circle cx="600" cy="350" r="74" fill="none" stroke="#00ff6630" stroke-width="1"/>
+          <circle cx="600" cy="350" r="60" fill="none" stroke="#00ff6650" stroke-width="0.8"/>
+          <g stroke="#00cc4420" stroke-width="0.7">
+            <line x1="600" y1="260" x2="600" y2="350"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(30,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(60,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(90,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(120,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(150,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(180,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(210,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(240,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(270,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(300,600,350)"/>
+            <line x1="600" y1="260" x2="600" y2="350" transform="rotate(330,600,350)"/>
+          </g>
+          <circle cx="600" cy="350" r="44" fill="url(#pupilGrad)" style="animation:pupilDrift 8s ease-in-out infinite;"/>
+          <rect x="505" y="260" width="190" height="3" fill="#00ff88" opacity="0.18" style="animation:scanLine 4s linear infinite;"/>
+          <circle cx="575" cy="320" r="14" fill="url(#glintGrad)" opacity="0.7"/>
+          <circle cx="622" cy="308" r="6" fill="#ffffff" opacity="0.4"/>
+        </g>
+        <ellipse cx="600" cy="350" rx="230" ry="112" fill="none" stroke="#003d28" stroke-width="2.5"/>
+        <path d="M 370 350 Q 600 238 830 350" fill="#001a10" opacity="0.35"/>
+        <g stroke="#002415" stroke-width="2" stroke-linecap="round" opacity="0.6">
+          <line x1="430" y1="300" x2="418" y2="284"/><line x1="470" y1="274" x2="462" y2="256"/>
+          <line x1="515" y1="255" x2="511" y2="237"/><line x1="560" y1="245" x2="558" y2="226"/>
+          <line x1="605" y1="242" x2="605" y2="223"/><line x1="650" y1="248" x2="652" y2="229"/>
+          <line x1="693" y1="260" x2="698" y2="242"/><line x1="733" y1="278" x2="741" y2="261"/>
+          <line x1="768" y1="302" x2="778" y2="287"/>
+        </g>
+      </g>
+      <g style="transform-origin:600px 350px;animation:blink2 11s ease-in-out 3s infinite;">
+        <ellipse cx="600" cy="350" rx="230" ry="112" fill="none"/>
+      </g>
+      <ellipse cx="600" cy="350" rx="210" ry="100" fill="#00ff6612" filter="url(#softGlow)"/>
+    </svg>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-h1 font-headline" data-i18n="hero_title">Designing <br/>Digital Excellence</h1>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary" data-i18n="hero_cta_consult">Book a Consultation</a>
+      <a href="#portfolio" class="btn-outline" data-i18n="hero_cta_portfolio">View Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-section">
+    <div class="services-section-inner">
+      <div class="services-top">
+        <h2 class="services-h2 font-headline" data-i18n="services_title">What We <br/>Build</h2>
+        <span class="section-label muted" data-i18n="services_label">Our Services</span>
+      </div>
+      <div class="service-tabs">
+        <button class="service-tab active" onclick="openTab('web')"><div class="service-tab-bar"></div><span class="service-tab-title font-headline" data-i18n="tab_web">Web Design</span></button>
+        <button class="service-tab" onclick="openTab('brand')"><div class="service-tab-bar"></div><span class="service-tab-title font-headline" data-i18n="tab_brand">Branding &amp; Marketing</span></button>
+        <button class="service-tab" onclick="openTab('seo')"><div class="service-tab-bar"></div><span class="service-tab-title font-headline" data-i18n="tab_seo">SEO Optimization</span></button>
+        <button class="service-tab" onclick="openTab('ai')"><div class="service-tab-bar"></div><span class="service-tab-title font-headline" data-i18n="tab_ai">AI Automation</span></button>
+      </div>
+
+      <div class="service-panel active" id="panel-web">
+        <div class="panel-left">
+          <div class="panel-tag" data-i18n="panel_web_tag">Service 01</div>
+          <h3 class="panel-h3 font-headline" data-i18n="panel_web_h3">Web Design &amp; Development</h3>
+          <p class="panel-desc" data-i18n="panel_web_desc">We craft high-performance websites that are architecturally sound, visually striking, and built to convert. Every pixel serves a purpose — no templates, no shortcuts.</p>
+          <div class="panel-features">
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_web_feat_1">Custom design tailored to your brand identity and target audience</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_web_feat_2">Fully responsive across all devices — mobile, tablet, desktop</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_web_feat_3">Performance-first architecture with sub-second load times</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_web_feat_4">CMS integration (WordPress, Webflow, custom) for easy management</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_web_feat_5">Accessibility (WCAG 2.1) and cross-browser compatibility</span></div>
+          </div>
+          <a href="#contact" class="panel-cta"><span data-i18n="panel_web_cta">Start a Project</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></a>
+        </div>
+        <div class="panel-right">
+          <div class="panel-stat-grid">
+            <div class="panel-stat"><span class="panel-stat-num font-headline">0.5s</span><span class="panel-stat-label" data-i18n="stat_web_1">Average load time on our builds</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">98+</span><span class="panel-stat-label" data-i18n="stat_web_2">Google PageSpeed score</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">100%</span><span class="panel-stat-label" data-i18n="stat_web_3">Mobile-first responsive</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">3×</span><span class="panel-stat-label" data-i18n="stat_web_4">Average conversion uplift</span></div>
+          </div>
+          <div class="panel-process">
+            <span class="panel-process-title" data-i18n="process_title">Our process</span>
+            <div class="panel-process-steps">
+              <div class="panel-process-step"><span class="panel-process-num">01</span><span data-i18n="process_step_1">Discovery &amp; strategy session</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">02</span><span data-i18n="process_step_2">Wireframes &amp; design mockups</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">03</span><span data-i18n="process_step_3">Development &amp; testing</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">04</span><span data-i18n="process_step_4">Launch &amp; performance review</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-panel" id="panel-brand">
+        <div class="panel-left">
+          <div class="panel-tag" data-i18n="panel_brand_tag">Service 02</div>
+          <h3 class="panel-h3 font-headline" data-i18n="panel_brand_h3">Branding &amp; Marketing</h3>
+          <p class="panel-desc" data-i18n="panel_brand_desc">Your brand is how the world perceives you before you speak. We build complete visual identities — logo, colour, typography, voice — and the marketing systems that put them in front of the right people. Whether you're launching from zero or refreshing an existing brand, we make sure you look like the best in your field.</p>
+          <div class="panel-features">
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_brand_feat_1">Logo design, colour palette &amp; full brand guidelines document</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_brand_feat_2">Brand voice, messaging framework &amp; market positioning</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_brand_feat_3">Social media visual kits &amp; ready-to-use content templates</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_brand_feat_4">Print &amp; digital collateral — business cards, pitch decks, ads</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_brand_feat_5">Paid &amp; organic campaign strategy tailored to your audience</span></div>
+          </div>
+          <a href="#contact" class="panel-cta"><span data-i18n="panel_brand_cta">Build Your Brand</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></a>
+        </div>
+        <div class="panel-right">
+          <div class="panel-stat-grid">
+            <div class="panel-stat"><span class="panel-stat-num font-headline">2×</span><span class="panel-stat-label" data-i18n="stat_brand_1">Brand recall after identity refresh</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">40%</span><span class="panel-stat-label" data-i18n="stat_brand_2">Higher engagement with cohesive branding</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">2 wk</span><span class="panel-stat-label" data-i18n="stat_brand_3">Full brand kit delivered</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">∞</span><span class="panel-stat-label" data-i18n="stat_brand_4">Scales across every touchpoint</span></div>
+          </div>
+          <div class="panel-process">
+            <span class="panel-process-title" data-i18n="process_title">Our process</span>
+            <div class="panel-process-steps">
+              <div class="panel-process-step"><span class="panel-process-num">01</span><span data-i18n="process_brand_1">Brand audit &amp; competitor research</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">02</span><span data-i18n="process_brand_2">Concept direction &amp; moodboard</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">03</span><span data-i18n="process_brand_3">Identity design &amp; client refinement</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">04</span><span data-i18n="process_brand_4">Brand guide delivery &amp; full rollout</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-panel" id="panel-seo">
+        <div class="panel-left">
+          <div class="panel-tag" data-i18n="panel_seo_tag">Service 03</div>
+          <h3 class="panel-h3 font-headline" data-i18n="panel_seo_h3">SEO Optimization</h3>
+          <p class="panel-desc" data-i18n="panel_seo_desc">Being invisible online is the same as not existing. We build search strategies that place your business at the top of Google — technically precise, content-driven, and focused on long-term results. We target the exact keywords your ideal clients are searching for, in Lithuanian, English, and beyond.</p>
+          <div class="panel-features">
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_seo_feat_1">Full technical SEO audit — page speed, structure &amp; crawlability</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_seo_feat_2">Local SEO setup to dominate searches in Lithuania &amp; the Baltic region</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_seo_feat_3">In-depth keyword research &amp; on-page content optimisation</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_seo_feat_4">Backlink strategy &amp; domain authority building over time</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_seo_feat_5">Monthly reporting — rankings, organic traffic &amp; conversion data</span></div>
+          </div>
+          <a href="#contact" class="panel-cta"><span data-i18n="panel_seo_cta">Get Found Online</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></a>
+        </div>
+        <div class="panel-right">
+          <div class="panel-stat-grid">
+            <div class="panel-stat"><span class="panel-stat-num font-headline">Top 3</span><span class="panel-stat-label" data-i18n="stat_seo_1">Average local ranking within 90 days</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">4×</span><span class="panel-stat-label" data-i18n="stat_seo_2">Organic traffic growth year-on-year</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">60%</span><span class="panel-stat-label" data-i18n="stat_seo_3">Lower cost per lead vs paid ads</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">24/7</span><span class="panel-stat-label" data-i18n="stat_seo_4">Traffic that works while you sleep</span></div>
+          </div>
+          <div class="panel-process">
+            <span class="panel-process-title" data-i18n="process_title">Our process</span>
+            <div class="panel-process-steps">
+              <div class="panel-process-step"><span class="panel-process-num">01</span><span data-i18n="process_seo_1">Technical audit &amp; baseline report</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">02</span><span data-i18n="process_seo_2">Keyword &amp; competitor mapping</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">03</span><span data-i18n="process_seo_3">On-page &amp; structural optimisation</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">04</span><span data-i18n="process_seo_4">Monthly tracking &amp; continuous iteration</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-panel" id="panel-ai">
+        <div class="panel-left">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:0.25rem;">
+            <div class="panel-tag" data-i18n="panel_ai_tag">Service 04</div>
+            <div class="badge-soon" data-i18n="coming_soon">Coming Soon</div>
+          </div>
+          <h3 class="panel-h3 font-headline" data-i18n="panel_ai_h3">AI Automation</h3>
+          <p class="panel-desc" data-i18n="panel_ai_desc">We are building the next generation of business tools — intelligent systems that automate the repetitive, surface the important, and free your team to focus on growth. From AI-powered lead handling to automated content pipelines, we will connect the dots across your entire operation so your business runs smarter, not harder.</p>
+          <div class="panel-features">
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_ai_feat_1">Automated lead capture, qualification &amp; CRM integration</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_ai_feat_2">Smart content generation &amp; scheduled publishing workflows</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_ai_feat_3">AI chatbot &amp; virtual assistant embedded into your website</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_ai_feat_4">Automated reporting dashboards that update in real time</span></div>
+            <div class="panel-feature"><div class="panel-feature-dot"></div><span data-i18n="panel_ai_feat_5">Custom-built AI tools fitted to your specific business processes</span></div>
+          </div>
+          <a href="#contact" class="panel-cta"><span data-i18n="panel_ai_cta">Join the Waitlist</span> <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span></a>
+        </div>
+        <div class="panel-right">
+          <div class="panel-stat-grid">
+            <div class="panel-stat"><span class="panel-stat-num font-headline">70%</span><span class="panel-stat-label" data-i18n="stat_ai_1">Reduction in manual daily tasks</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">10×</span><span class="panel-stat-label" data-i18n="stat_ai_2">Faster content &amp; report production</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">24/7</span><span class="panel-stat-label" data-i18n="stat_ai_3">Automated customer interactions</span></div>
+            <div class="panel-stat"><span class="panel-stat-num font-headline">ROI+</span><span class="panel-stat-label" data-i18n="stat_ai_4">Measurable efficiency gains from day one</span></div>
+          </div>
+          <div class="panel-process">
+            <span class="panel-process-title" data-i18n="what_coming">What's coming</span>
+            <div class="panel-process-steps">
+              <div class="panel-process-step"><span class="panel-process-num">01</span><span data-i18n="process_ai_1">Full workflow audit &amp; automation mapping</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">02</span><span data-i18n="process_ai_2">AI tool selection &amp; custom development</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">03</span><span data-i18n="process_ai_3">System integration &amp; team onboarding</span></div>
+              <div class="panel-process-step"><span class="panel-process-num">04</span><span data-i18n="process_ai_4">Live monitoring &amp; continuous improvement</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="roadmap-inner">
+    <div class="roadmap-header">
+      <h2 class="roadmap-h2 font-headline" data-i18n="roadmap_title">Our <br/>Roadmap</h2>
+      <span class="section-label gold" data-i18n="roadmap_label">01 — 04 / Seamless Execution</span>
+    </div>
+    <div class="roadmap-steps">
+      <div class="roadmap-line"></div>
+      <div class="step"><div class="step-num font-headline">01</div><h3 class="step-h3 font-headline" data-i18n="step_1_title">Book a Consultation</h3><p class="step-p" data-i18n="step_1_desc">Client schedules an initial consultation to map out the vision.</p></div>
+      <div class="step"><div class="step-num font-headline">02</div><h3 class="step-h3 font-headline" data-i18n="step_2_title">Call</h3><p class="step-p" data-i18n="step_2_desc">We discuss the project in detail, defining goals and technical requirements.</p></div>
+      <div class="step"><div class="step-num font-headline">03</div><h3 class="step-h3 font-headline" data-i18n="step_3_title">Sketches, Colors, Visuals</h3><p class="step-p" data-i18n="step_3_desc">Initial designs and high-fidelity visuals are sent for your critical feedback.</p></div>
+      <div class="step"><div class="step-num font-headline">04</div><h3 class="step-h3 font-headline" data-i18n="step_4_title">Start Work</h3><p class="step-p" data-i18n="step_4_desc">The project construction begins based on the finalized and approved designs.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-inner">
+    <div class="section-header">
+      <h2 class="section-h2 font-headline" data-i18n="portfolio_title">Selected <br/>Works</h2>
+      <span class="section-label muted" data-i18n="portfolio_label">01 — 03 / High Performance Projects</span>
+    </div>
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="work-card" onclick="openProject('./work-1.webp')">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_1_title">Beauty Salon</h3>
+        <div class="work-desc" data-i18n="work_1_desc">UI/UX Design & Development</div>
+      </div>
+      <img src="./work-1.webp" alt="Beauty Salon">
+    </div>
+    <div class="work-card" onclick="openProject('./work-2.webp')">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_2_title">Modern E-commerce</h3>
+        <div class="work-desc" data-i18n="work_2_desc">E-commerce Architecture</div>
+      </div>
+      <img src="./work-2.webp" alt="Modern E-commerce">
+    </div>
+    <div class="work-card" onclick="openProject('./work-3.webp')">
+      <div class="work-overlay">
+        <h3 class="work-title" data-i18n="work_3_title">Digital Agency</h3>
+        <div class="work-desc" data-i18n="work_3_desc">Corporate Digital Strategy</div>
+      </div>
+      <img src="./work-3.webp" alt="Digital Agency">
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-title-wrap">
+      <h2 class="pricing-h2 font-headline" data-i18n="pricing_title">Pricing Plans</h2>
+      <div class="pricing-bar"></div>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3 class="price-name font-headline" data-i18n="price_starter_name">Startup</h3>
+        <div class="price-amount font-headline"><span data-i18n="price_starter_amount">From €799</span> <span data-i18n="price_starter_unit">/ project</span></div>
+        <ul class="price-features">
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_starter_feat_1">Custom Design (5 pgs)</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_starter_feat_2">Mobile Responsive</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_starter_feat_3">Basic SEO Setup</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_starter_feat_4">1 Month Maintenance</span></li>
+        </ul>
+        <button class="btn-border" onclick="location.href='#contact'" data-i18n="price_starter_cta">Start Now</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge" data-i18n="price_badge">Most Popular</div>
+        <h3 class="price-name font-headline" data-i18n="price_strategic_name">Strategic</h3>
+        <div class="price-amount font-headline"><span data-i18n="price_strategic_amount">From €1399</span> <span data-i18n="price_starter_unit">/ project</span></div>
+        <ul class="price-features">
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_strategic_feat_1">Advanced Editorial Design</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_strategic_feat_2">CMS Integration</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_strategic_feat_3">Conversion Tracking</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_strategic_feat_4">3 Months Maintenance</span></li>
+        </ul>
+        <button class="btn-filled" onclick="location.href='#contact'" data-i18n="price_strategic_cta">Scale My Business</button>
+      </div>
+      <div class="price-card">
+        <h3 class="price-name font-headline" data-i18n="price_enterprise_name">Enterprise</h3>
+        <div class="price-amount font-headline"><span data-i18n="price_enterprise_amount">From €2499</span> <span data-i18n="price_starter_unit">/ project</span></div>
+        <ul class="price-features">
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_enterprise_feat_1">E-commerce Foundation</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_enterprise_feat_2">Custom Functionality</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_enterprise_feat_3">Full Brand Identity Kit</span></li>
+          <li><span class="material-symbols-outlined check-icon">check</span> <span data-i18n="price_enterprise_feat_4">Priority Support</span></li>
+        </ul>
+        <button class="btn-border" onclick="location.href='#contact'" data-i18n="price_enterprise_cta">Go Unlimited</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="blog-inner">
+    <div class="blog-header">
+      <h2 class="section-h2 font-headline" data-i18n="blog_title">Digital <br/>Insights</h2>
+      <a href="#contact" class="blog-view-all" data-i18n="blog_view_all">View All Articles</a>
+    </div>
+    <div class="blog-grid">
+      <!-- Article 1 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_1_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" alt="blog1"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_1_cat">AI Automation</span> — 
+          <span data-i18n="blog_1_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_1_title">AI Automation: How to Save 10+ Hours per Week</h3>
+        <p class="blog-p" data-i18n="blog_1_desc">Save 10+ hours per week by automating email, CRM, and socials. A complete guide to Make, Zapier, and n8n.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_2_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="blog2"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_2_cat">Web Development</span> — 
+          <span data-i18n="blog_2_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_2_title">Professional Website for Vilnius Businesses in 2026</h3>
+        <p class="blog-p" data-i18n="blog_2_desc">8 must-have elements for your website in 2026, local pricing benchmarks, and tips for hiring the right agency.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="blog-card" data-i18n-attr="onclick:blog_3_link">
+        <div class="blog-img-wrap">
+          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=800" alt="blog3"/>
+        </div>
+        <span class="blog-meta">
+          <span data-i18n="blog_3_cat">Branding</span> — 
+          <span data-i18n="blog_3_date">April 9, 2026</span>
+        </span>
+        <h3 class="blog-h3 font-headline" data-i18n="blog_3_title">Branding vs. Logo: A Guide for Lithuanian Startups</h3>
+        <p class="blog-p" data-i18n="blog_3_desc">Why your logo isn't your brand. Full branding process, budgets, and strategy for the Baltic startup scene.</p>
+        <button class="blog-read-more">
+          <span data-i18n="blog_read">Read More</span> 
+          <span class="material-symbols-outlined" style="font-size:0.9rem;">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <h2 class="contact-h2 font-headline" data-i18n="contact_title">Let's <br/>Build.</h2>
+      <div class="contact-info">
+        <div><span class="info-label" data-i18n="contact_label_location">Location</span><p class="info-value font-headline" data-i18n="contact_value_location">Vilnius, Lithuania</p></div>
+        <div><span class="info-label" data-i18n="contact_direct">Direct</span>
+          <p class="info-value font-headline"><a href="mailto:evsei@info.lt">evsei@info.lt</a></p>
+          <p class="info-value font-headline" style="margin-top:0.5rem;"><a href="tel:+37067464446">+370 674 64446</a></p>
+        </div>
+        <div class="contact-social">
+          <a href="https://www.instagram.com/evseilt/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_insta">Instagram</a>
+          <a href="https://www.linkedin.com/in/erikas-jevseicikas-b6709b3ba/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_linkedin">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <form class="contact-form" id="contactForm">
+        <div class="form-field"><input type="text" name="name" placeholder="Your Name" data-i18n="form_name" data-i18n-attr="placeholder" required/></div>
+        <div class="form-field"><input type="email" name="email" placeholder="Email Address" data-i18n="form_email" data-i18n-attr="placeholder" required/></div>
+        <div class="form-field"><input type="tel" name="phone" placeholder="Phone Number" data-i18n="form_phone" data-i18n-attr="placeholder"/></div>
+        <div class="form-field">
+          <select name="project_details" required>
+            <option value="" disabled selected data-i18n="form_message">Project Details</option>
+            <option value="Web Design" data-i18n="service_web">Web Design</option>
+            <option value="Branding & Marketing" data-i18n="service_brand">Branding & Marketing</option>
+            <option value="SEO Optimization" data-i18n="service_seo">SEO Optimization</option>
+            <option value="AI Automation" data-i18n="service_ai">AI Automation (Coming soon)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit"><span data-i18n="form_submit">Submit Project</span> <span class="submit-line"></span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- COOKIE -->
+<div id="cookie-banner">
+  <p class="cookie-text" data-i18n="cookie_text">We use analytical cookies to refine your digital experience. By continuing, you agree to our architecture.</p>
+  <div class="cookie-btns">
+    <button class="btn-cookie-accept" id="cookieAccept" data-i18n="cookie_accept">Accept</button>
+    <button class="btn-cookie-details" id="cookieDetails" data-i18n="cookie_details">Details</button>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button id="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <span class="material-symbols-outlined" style="font-size:1.2rem;">arrow_upward</span>
+</button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="admin.html" style="text-decoration:none; color:inherit;"><div class="footer-logo">Evsei</div></a>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/erikas-jevseicikas-b6709b3ba/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_linkedin">LinkedIn</a>
+      <a href="https://www.instagram.com/evseilt/" target="_blank" rel="noopener noreferrer" data-i18n="contact_social_insta">Instagram</a>
+      <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+      <a href="#" data-i18n="footer_cookie">Cookie Policy</a>
+    </div>
+    <div class="footer-copy" data-i18n="footer_copy">© 2025 Evsei. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- PROJECT MODAL -->
+<div id="projectModal" class="project-modal" onclick="closeProject()">
+  <span class="modal-close" onclick="closeProject()">&times;</span>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <img id="modalImg" src="" alt="Project View">
+  </div>
+</div>
+
+
+<script src="translations.js"></script>
+<script src="main.js"></script>
+<script src="project-modal.js"></script>
+</body>
+</html>
