@@ -9,6 +9,8 @@ const translations = {
     nav_cta: "Gauti konsultaciją",
     
     // Hero
+    head_title: "Svetainių kūrimas ir SEO optimizavimas Vilniuje",
+    faq_head_title: "DUK | Svetainių kūrimas ir SEO optimizavimas Vilniuje",
     hero_title: "Jūsų augimas internete prasideda čia",
     hero_cta_consult: "Gauti konsultaciją",
     hero_cta_portfolio: "Peržiūrėti darbus",
@@ -224,6 +226,8 @@ const translations = {
     nav_cta: "Book a free consultation",
     
     // Hero
+    head_title: "Website Design & SEO Optimization in Vilnius, Lithuania",
+    faq_head_title: "FAQ | Website Design & SEO Optimization in Vilnius, Lithuania",
     hero_title: "Designing <br/>Digital Excellence",
     hero_cta_consult: "Book a Consultation",
     hero_cta_portfolio: "View Portfolio",
